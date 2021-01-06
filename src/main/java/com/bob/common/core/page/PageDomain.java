@@ -19,11 +19,15 @@ public class PageDomain {
     /** 正序倒序. */
     private String isAsc = "asc";
 
-//    public String getOrderBy(){
-//        if (StringUtils.isEmpty(orderByColumn)){
-//           return "";
-//        }
-//        return StringUtils.toUn
-//    }
+    /**
+     * 排序
+     * @return
+     */
+    public String getOrderBy(){
+        if (StringUtils.isEmpty(orderByColumn)){
+           return "";
+        }
+        return StringUtils.toUnderScoreCase(orderByColumn) + " " + isAsc;
+    }
 
 }
