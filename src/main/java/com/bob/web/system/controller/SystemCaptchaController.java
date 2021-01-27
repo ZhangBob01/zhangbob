@@ -1,4 +1,4 @@
-package com.bob.web.controller.system;
+package com.bob.web.system.controller;
 
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;

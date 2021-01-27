@@ -29,3 +29,9 @@ spring:
     mode: HTML
     encoding: UTF-8
     cache: false
+
+mybatis:
+  # 搜索指定包别名
+  type-aliases-package: com.bob.web.**.domain
+  # 配置mapper扫描路径
+  mapper-locations: classpath*:mapper/**/*Mapper.xml

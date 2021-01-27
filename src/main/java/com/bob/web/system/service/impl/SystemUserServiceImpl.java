@@ -1,0 +1,25 @@
+package com.bob.web.system.service.impl;
+
+import com.bob.web.system.domain.SystemUser;
+import com.bob.web.system.mapper.SystemUserMapper;
+import com.bob.web.system.service.SystemUserService;
+import lombok.extern.java.Log;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+/**
+ * @author: zhang bob
+ * @date: 2021-01-27 11:53
+ * @description: 用户业务逻辑类
+ */
+@Service
+@Log
+public class SystemUserServiceImpl implements SystemUserService {
+    @Autowired
+    private SystemUserMapper systemUserMapper;
+
+    @Override
+    public SystemUser findUserByUsername(String username) {
+        return systemUserMapper.findUserByUsername(username);
+    }
+}

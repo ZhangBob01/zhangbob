@@ -1,8 +1,12 @@
-package com.bob.web.controller.system;
+package com.bob.web.system.controller;
 
 import com.bob.common.core.controller.BaseController;
 import com.bob.common.core.domain.AjaxResult;
 import com.bob.common.utils.ServletUtils;
+import com.bob.common.utils.StringUtils;
+import com.bob.web.system.domain.SystemUser;
+import com.bob.web.system.service.SystemUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +22,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 public class SystemLoginController extends BaseController {
+
+    @Autowired
+    private SystemUserService systemUserService;
 
     /**
      * 用户登录
@@ -44,12 +51,20 @@ public class SystemLoginController extends BaseController {
     @PostMapping("/login")
     @ResponseBody
     public AjaxResult ajaxLogin(String username, String password, Boolean rememberMe){
-        if (!"admin".equals(username)) {
-            return error("用户名错误");
+        if (StringUtils.isEmpty(username)) {
+            return error("请输入用户名");
         }
-        if (!"admin123".equals(password)) {
-            return error("密码错误");
+        if (StringUtils.isEmpty(password)) {
+            return error("请输入密码");
         }
+
+        //根据用户名查询用户信息
+        SystemUser user = systemUserService.findUserByUsername(username);
+        if (StringUtils.isNull(user)){
+            return error("用户信息不存在");
+        }
+
+
         return success();
     }
 }
