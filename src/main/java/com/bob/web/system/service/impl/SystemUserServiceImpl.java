@@ -4,6 +4,7 @@ import com.bob.web.system.domain.SystemUser;
 import com.bob.web.system.mapper.SystemUserMapper;
 import com.bob.web.system.service.SystemUserService;
 import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
  * @description: 用户业务逻辑类
  */
 @Service
-@Log
+@Slf4j
 public class SystemUserServiceImpl implements SystemUserService {
     @Autowired
     private SystemUserMapper systemUserMapper;
