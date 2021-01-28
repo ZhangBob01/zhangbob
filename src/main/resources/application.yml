@@ -42,11 +42,10 @@ mybatis:
   # 加载全局的文件配置/
   config-location: classpath:mybatis/mybatis-config.xml
   # 打印sql
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  #configuration:
+  #  log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 # 配置日志
 logging:
   level:
-    com.bob: debug
-    org.springframework: warn
+    com.bob.web.system.mapper: trace
