@@ -26,8 +26,7 @@ public class SystemLogininforServiceImpl implements SystemLogininforService {
      * @param logininfor 访问日志对象
      */
     @Override
-    public void insertLogininfor(SystemLogininfor logininfor)
-    {
+    public void insertLogininfor(SystemLogininfor logininfor) {
         logininforMapper.insertLogininfor(logininfor);
     }
 
@@ -38,8 +37,7 @@ public class SystemLogininforServiceImpl implements SystemLogininforService {
      * @return 登录记录集合
      */
     @Override
-    public List<SystemLogininfor> selectLogininforList(SystemLogininfor logininfor)
-    {
+    public List<SystemLogininfor> selectLogininforList(SystemLogininfor logininfor) {
         return logininforMapper.selectLogininforList(logininfor);
     }
 
@@ -50,8 +48,7 @@ public class SystemLogininforServiceImpl implements SystemLogininforService {
      * @return
      */
     @Override
-    public int deleteLogininforByIds(String ids)
-    {
+    public int deleteLogininforByIds(String ids) {
         return logininforMapper.deleteLogininforByIds(Convert.toStrArray(ids));
     }
 
@@ -59,8 +56,7 @@ public class SystemLogininforServiceImpl implements SystemLogininforService {
      * 清空系统登录日志
      */
     @Override
-    public void cleanLogininfor()
-    {
+    public void cleanLogininfor() {
         logininforMapper.cleanLogininfor();
     }
 }
