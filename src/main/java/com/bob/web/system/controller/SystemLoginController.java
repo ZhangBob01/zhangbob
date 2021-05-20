@@ -6,6 +6,10 @@ import com.bob.common.utils.ServletUtils;
 import com.bob.common.utils.StringUtils;
 import com.bob.web.system.domain.SystemUser;
 import com.bob.web.system.service.SystemUserService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,21 +54,25 @@ public class SystemLoginController extends BaseController {
      */
     @PostMapping("/login")
     @ResponseBody
-    public AjaxResult ajaxLogin(String username, String password, Boolean rememberMe){
-        if (StringUtils.isEmpty(username)) {
-            return error("请输入用户名");
+    public AjaxResult ajaxLogin(String username, String password, Boolean rememberMe) {
+        // 获取shiro token
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            subject.login(token);
+            return success();
+        } catch (AuthenticationException e) {
+            String msg = "用户或密码错误";
+            if (StringUtils.isNotEmpty(e.getMessage())) {
+                msg = e.getMessage();
+            }
+            return error(msg);
         }
-        if (StringUtils.isEmpty(password)) {
-            return error("请输入密码");
-        }
-
-        //根据用户名查询用户信息
-        SystemUser user = systemUserService.findUserByUsername(username);
-        if (StringUtils.isNull(user)){
-            return error("用户信息不存在");
-        }
-
-
-        return success();
     }
+
+    @GetMapping("/unauth")
+    public String unauth() {
+        return "error/unauth";
+    }
+    
 }

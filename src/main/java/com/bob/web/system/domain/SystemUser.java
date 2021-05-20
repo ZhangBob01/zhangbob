@@ -4,6 +4,7 @@ import com.bob.common.core.domain.BaseEntity;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author: zhang bob
@@ -51,5 +52,16 @@ public class SystemUser extends BaseEntity {
     private Date loginDate;
     /** 密码最后更新时间 */
     private Date pwdUpdateDate;
+    /** 部门对象. */
+    private SystemDept systemDept;
+    /** 角色列表. */
+    private List<SystemRole> roles;
 
+    public boolean isAdmin() {
+        return isAdmin(this.userId);
+    }
+
+    public static boolean isAdmin(Long userId) {
+        return userId != null && 1L == userId;
+    }
 }

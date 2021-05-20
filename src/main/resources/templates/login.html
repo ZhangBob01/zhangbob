@@ -10,11 +10,11 @@
     <meta http-equiv="x-ua-compatible" content="IE=edge">
     <title>系统用户登录</title>
 
-    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
-    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet" />
-    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
-    <link href="../static/css/login.css" th:href="@{/css/login.css}" rel="stylesheet" />
-    <link href="../static/bob/css/bob-ui.css" th:href="@{/bob/css/bob-ui.css?v=4.5.1}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/login.css}" rel="stylesheet" />
+    <link th:href="@{/bob/css/bob-ui.css?v=4.5.1}" rel="stylesheet"/>
 
     <style type="text/css"> label.error{position: inherit}</style>
     <script>
@@ -75,13 +75,15 @@
     </div>
 <!--    <script th:inline="javascript"> var ctx = [[@{/}]]; var captchaType = [[${captchaType}]]; </script>-->
     <script th:inline="javascript"> var ctx = [[@{/}]]; var captchaType = "math"; </script>
+    <!-- 全局js -->
     <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
     <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <!-- 验证插件 -->
     <script src="../static/ajax/libs/validate/jquery.validate.min.js" th:src="@{/ajax/libs/validate/jquery.validate.min.js}"></script>
     <script src="../static/ajax/libs/validate/messages_zh.min.js" th:src="@{/ajax/libs/validate/messages_zh.min.js}"></script>
     <script src="../static/ajax/libs/layer/layer.min.js" th:src="@{/ajax/libs/layer/layer.min.js}"></script>
     <script src="../static/ajax/libs/blockUI/jquery.blockUI.js" th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
-    <script src="../static/bob/js/bob-ui.js" th:src="@{/bob/js/bob-ui.js?v=4.5.1}"></script>
+    <script src="../static/bob/js/bob-ui.js" th:src="@{/bob/js/bob-ui.js?v=4.6.0}"></script>
     <script src="../static/bob/login.js" th:src="@{/bob/login.js}"></script>
 </body>
 </html>

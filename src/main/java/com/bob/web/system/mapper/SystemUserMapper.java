@@ -15,4 +15,17 @@ public interface SystemUserMapper {
      */
     SystemUser findUserByUsername(String username);
 
+    /**
+     * 根据登录名查询用户信息
+     * @param loginname
+     * @return
+     */
+    SystemUser findUserByLoginname(String loginname);
+
+    /**
+     * 修改用户信息
+     * @param user
+     * @return
+     */
+    int updateUser(SystemUser user);
 }

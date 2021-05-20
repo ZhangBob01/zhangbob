@@ -23,4 +23,14 @@ public class SystemUserServiceImpl implements SystemUserService {
     public SystemUser findUserByUsername(String username) {
         return systemUserMapper.findUserByUsername(username);
     }
+
+    @Override
+    public SystemUser findUserByLoginname(String loginname) {
+        return systemUserMapper.findUserByLoginname(loginname);
+    }
+
+    @Override
+    public int updateUserInfo(SystemUser user) {
+        return systemUserMapper.updateUser(user);
+    }
 }
