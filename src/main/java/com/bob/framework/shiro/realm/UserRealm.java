@@ -38,6 +38,7 @@ public class UserRealm extends AuthorizingRealm {
 
     /**
      * 授权
+     *
      * @param principalCollection
      * @return
      */
@@ -70,6 +71,7 @@ public class UserRealm extends AuthorizingRealm {
 
     /**
      * 登录认证
+     *
      * @param authenticationToken
      * @return
      * @throws AuthenticationException
@@ -80,7 +82,7 @@ public class UserRealm extends AuthorizingRealm {
         String username = token.getUsername();
         String password = "";
 
-        if (token.getPassword() != null){
+        if (token.getPassword() != null) {
             password = new String(token.getPassword());
         }
         SystemUser user = null;
@@ -109,8 +111,7 @@ public class UserRealm extends AuthorizingRealm {
     /**
      * 清理指定用户授权信息缓存
      */
-    public void clearCachedAuthorizationInfo(Object principal)
-    {
+    public void clearCachedAuthorizationInfo(Object principal) {
         SimplePrincipalCollection principals = new SimplePrincipalCollection(principal, getName());
         this.clearCachedAuthorizationInfo(principals);
     }
@@ -118,13 +119,10 @@ public class UserRealm extends AuthorizingRealm {
     /**
      * 清理所有用户授权信息缓存
      */
-    public void clearAllCachedAuthorizationInfo()
-    {
+    public void clearAllCachedAuthorizationInfo() {
         Cache<Object, AuthorizationInfo> cache = getAuthorizationCache();
-        if (cache != null)
-        {
-            for (Object key : cache.keys())
-            {
+        if (cache != null) {
+            for (Object key : cache.keys()) {
                 cache.remove(key);
             }
         }
