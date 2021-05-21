@@ -28,11 +28,12 @@ public class SystemLoginService {
 
     /**
      * 登录校验
+     *
      * @param username
      * @param password
      * @return
      */
-    public SystemUser login (String username, String password){
+    public SystemUser login(String username, String password) {
         // 验证码校验
         if (ShiroConstants.CAPTCHA_ERROR.equals(ServletUtils.getRequest().getAttribute(ShiroConstants.CURRENT_CAPTCHA))) {
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error")));
@@ -45,16 +46,14 @@ public class SystemLoginService {
         }
         // 密码如果不在指定范围内 错误
         if (password.length() < UserConstants.PASSWORD_MIN_LENGTH
-                || password.length() > UserConstants.PASSWORD_MAX_LENGTH)
-        {
+                || password.length() > UserConstants.PASSWORD_MAX_LENGTH) {
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.password.not.match")));
             throw new UserPasswordNotMatchException();
         }
 
         // 用户名不在指定范围内 错误
         if (username.length() < UserConstants.USERNAME_MIN_LENGTH
-                || username.length() > UserConstants.USERNAME_MAX_LENGTH)
-        {
+                || username.length() > UserConstants.USERNAME_MAX_LENGTH) {
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.password.not.match")));
             throw new UserPasswordNotMatchException();
         }
@@ -74,20 +73,17 @@ public class SystemLoginService {
          }
          */
 
-        if (user == null)
-        {
+        if (user == null) {
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.not.exists")));
             throw new UserNotExistsException();
         }
 
-        if (UserStatus.DELETED.getCode().equals(user.getDelFlag()))
-        {
+        if (UserStatus.DELETED.getCode().equals(user.getDelFlag())) {
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.password.delete")));
             throw new UserDeleteException();
         }
 
-        if (UserStatus.DISABLE.getCode().equals(user.getStatus()))
-        {
+        if (UserStatus.DISABLE.getCode().equals(user.getStatus())) {
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.blocked", user.getRemark())));
             throw new UserBlockedException();
         }
@@ -102,18 +98,11 @@ public class SystemLoginService {
     /**
      * 记录登录信息
      */
-    public void recordLoginInfo(SystemUser user)
-    {
+    public void recordLoginInfo(SystemUser user) {
         user.setLoginIp(ShiroUtils.getIp());
         user.setLoginDate(DateUtils.getNowDate());
         userService.updateUserInfo(user);
     }
-
-
-
-
-
-
 
 
 }
