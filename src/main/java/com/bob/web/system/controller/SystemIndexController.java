@@ -70,7 +70,8 @@ public class SystemIndexController extends BaseController {
                 break;
             }
         }
-        return "index";
+        String webIndex = "topnav".equalsIgnoreCase(indexStyle) ? "index-topnav" : "index";
+        return webIndex;
     }
 
     /**
