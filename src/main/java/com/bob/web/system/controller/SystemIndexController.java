@@ -1,6 +1,7 @@
 package com.bob.web.system.controller;
 
 import com.bob.common.config.BobConfig;
+import com.bob.common.constant.ShiroConstants;
 import com.bob.common.core.controller.BaseController;
 import com.bob.common.core.text.Convert;
 import com.bob.common.utils.DateUtils;
@@ -36,11 +37,12 @@ public class SystemIndexController extends BaseController {
 
     /**
      * 跳转系统首页
+     *
      * @param modelMap
      * @return
      */
     @GetMapping("/index")
-    public String index(ModelMap modelMap){
+    public String index(ModelMap modelMap) {
         // 获取用户信息
         SystemUser user = ShiroUtils.getSysUser();
 
@@ -102,6 +104,19 @@ public class SystemIndexController extends BaseController {
         return initPasswordModify != null && initPasswordModify == 1 && pwdUpdateDate == null;
     }
 
+    /**
+     * 锁屏操作
+     * @param modelMap
+     * @return
+     */
+    @GetMapping("/lockscreen")
+    public String lockscreen (ModelMap modelMap) {
+        // 设置用户信息
+        modelMap.put("user", ShiroUtils.getSysUser());
+        // 设置session中锁屏标志
+        ServletUtils.getSesion().setAttribute(ShiroConstants.LOCK_SCREEN, true);
+        return "lock";
+    }
 
 }
 
