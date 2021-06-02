@@ -131,7 +131,7 @@ public class SystemIndexController extends BaseController {
      */
     @PostMapping("/unlockscreen")
     @ResponseBody
-    public AjaxResult unlockscreen (String password){
+    public AjaxResult unlockscreen(String password) {
         SystemUser user = ShiroUtils.getSysUser();
         if (StringUtils.isNull(user)) {
             return AjaxResult.error("服务器超时，请重新登录");
@@ -141,6 +141,15 @@ public class SystemIndexController extends BaseController {
             return AjaxResult.success();
         }
         return AjaxResult.error("密码不正确，请重新输入");
+    }
+
+    /**
+     * 切换主题
+     * @return
+     */
+    @GetMapping("/system/switchSkin")
+    public String switchSkin() {
+        return "skin";
     }
 
 }
