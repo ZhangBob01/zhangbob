@@ -96,7 +96,7 @@
 </head>
 <body class="lockscreen">
     <div class="lockscreen-wrapper">
-        <div class="lockscreen-wrapper"></div>
+        <div class="lockscreen-time"></div>
         <div class="lockscreen-name">[[${user.loginName}]] / [[${#strings.defaultString(user.userName, '-')}]]</div>
 
         <div class="lockscreen-item">
@@ -139,7 +139,7 @@
             };
 
             if (/(y+)/.test(fmt)) {
-                fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substring(4, RegExp.$1.length));
+                fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substring(4 - RegExp.$1.length));
             }
             for (var k in o){
                 if (new RegExp("(" + k + ")").test(fmt)) {
@@ -153,10 +153,12 @@
             $('.lockscreen-item').text((new Date()).format('hh:mm:ss'));
             setInterval(function () {
                 $('.lockscreen-time').text((new Date()).format('hh:mm:ss'));
-            })
+            }, 500);
+            init();
+            animate();
         });
 
-        $(document).keydown(function () {
+        $(document).keydown(function (event) {
             if (event.keyCode == 13) {
                 unlock();
             }
