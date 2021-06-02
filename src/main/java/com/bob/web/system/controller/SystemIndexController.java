@@ -3,11 +3,13 @@ package com.bob.web.system.controller;
 import com.bob.common.config.BobConfig;
 import com.bob.common.constant.ShiroConstants;
 import com.bob.common.core.controller.BaseController;
+import com.bob.common.core.domain.AjaxResult;
 import com.bob.common.core.text.Convert;
 import com.bob.common.utils.DateUtils;
 import com.bob.common.utils.ServletUtils;
 import com.bob.common.utils.ShiroUtils;
 import com.bob.common.utils.StringUtils;
+import com.bob.framework.shiro.service.SysPasswordService;
 import com.bob.web.system.domain.SystemMenu;
 import com.bob.web.system.domain.SystemUser;
 import com.bob.web.system.service.SystemConfigService;
@@ -16,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import javax.servlet.http.Cookie;
@@ -34,6 +38,8 @@ public class SystemIndexController extends BaseController {
     private SystemMenuService systemMenuService;
     @Autowired
     private SystemConfigService configService;
+    @Autowired
+    private SysPasswordService passwordService;
 
     /**
      * 跳转系统首页
@@ -116,6 +122,25 @@ public class SystemIndexController extends BaseController {
         // 设置session中锁屏标志
         ServletUtils.getSesion().setAttribute(ShiroConstants.LOCK_SCREEN, true);
         return "lock";
+    }
+
+    /**
+     * 接触锁屏
+     * @param password
+     * @return
+     */
+    @PostMapping("/unlockscreen")
+    @ResponseBody
+    public AjaxResult unlockscreen (String password){
+        SystemUser user = ShiroUtils.getSysUser();
+        if (StringUtils.isNull(user)) {
+            return AjaxResult.error("服务器超时，请重新登录");
+        }
+        if (passwordService.matches(user, password)) {
+            ServletUtils.getSesion().removeAttribute(ShiroConstants.LOCK_SCREEN);
+            return AjaxResult.success();
+        }
+        return AjaxResult.error("密码不正确，请重新输入");
     }
 
 }

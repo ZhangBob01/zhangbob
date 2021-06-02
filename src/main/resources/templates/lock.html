@@ -10,7 +10,7 @@
     <meta http-equiv="x-ua-compatible" content="IE=edge">
     <title>锁定屏幕</title>
 
-    <link th:href="@{favicon.ico}" rel="shortcut icon" />
+    <link th:href="@{favicon.ico}" rel="shortcut icon"/>
     <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
     <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
     <style>
@@ -101,13 +101,15 @@
 
     <div class="lockscreen-item">
         <div class="lockscreen-image">
-            <img th:src="(${#strings.isEmpty(user.avatar)}) ? @{/img/profile.jpg} : @{${user.avatar}}" th:onerror="this.src='img/profile.jpg'" class="img-circle" alt="User Image">
+            <img th:src="(${#strings.isEmpty(user.avatar)}) ? @{/img/profile.jpg} : @{${user.avatar}}"
+                 th:onerror="this.src='img/profile.jpg'" class="img-circle" alt="User Image">
         </div>
         <form class="lockscreen-credentials" method="post" action="#" onsubmit="return false;">
             <div class="input-group">
                 <input type="password" name="password" autocomplete="off" class="form-control" placeholder="密码">
                 <div class="input-group-btn">
-                    <button type="button" class="btn" onclick="unlock()"> <i class="fa fa-arrow-right text-muted"></i></button>
+                    <button type="button" class="btn" onclick="unlock()"><i class="fa fa-arrow-right text-muted"></i>
+                    </button>
                 </div>
             </div>
         </form>
@@ -150,16 +152,16 @@
             return fmt;
         }
 
-        $(function() {
+        $(function () {
             $('.lockscreen-time').text((new Date()).format('hh:mm:ss'));
-            setInterval(function() {
+            setInterval(function () {
                 $('.lockscreen-time').text((new Date()).format('hh:mm:ss'));
             }, 500);
             init();
             animate();
         });
 
-    $(document).keydown(function(event) {
+    $(document).keydown(function (event) {
         if (event.keyCode == 13) {
             unlock();
         }
@@ -181,11 +183,11 @@
             url: ctx + "unlockscreen",
             type: "post",
             dataType: "json",
-            data: { password: password },
-            beforeSend: function() {
+            data: {password: password},
+            beforeSend: function () {
                 index = layer.load(2, {shade: false});
             },
-            success: function(result) {
+            success: function (result) {
                 if (result.code == web_status.SUCCESS) {
                     location.href = ctx + 'index';
                 } else {
@@ -202,14 +204,14 @@
     var camera, scene, projector, renderer;
     var PI2 = Math.PI * 2;
 
-    var programFill = function(context) {
+    var programFill = function (context) {
         context.beginPath();
         context.arc(0, 0, 1, 0, PI2, true);
         context.closePath();
         context.fill();
     };
 
-    var programStroke = function(context) {
+    var programStroke = function (context) {
         context.lineWidth = 0.05;
         context.beginPath();
         context.arc(0, 0, 1, 0, PI2, true);
@@ -217,7 +219,8 @@
         context.stroke();
     };
 
-    var mouse = { x: 0, y: 0 }, INTERSECTED;
+    var mouse = {x: 0, y: 0}, INTERSECTED;
+
     function init() {
         container = document.createElement('div');
         container.id = 'bgc';
@@ -230,7 +233,10 @@
         scene = new THREE.Scene();
 
         for (var i = 0; i < 100; i++) {
-            var particle = new THREE.Particle(new THREE.ParticleCanvasMaterial({ color: Math.random() * 0x808080 + 0x808080, program: programStroke }));
+            var particle = new THREE.Particle(new THREE.ParticleCanvasMaterial({
+                color: Math.random() * 0x808080 + 0x808080,
+                program: programStroke
+            }));
             particle.position.x = Math.random() * 800 - 400;
             particle.position.y = Math.random() * 800 - 400;
             particle.position.z = Math.random() * 800 - 400;
@@ -244,6 +250,7 @@
         document.addEventListener('mousemove', onDocumentMouseMove, false);
         window.addEventListener('resize', onWindowResize, false);
     };
+
     function onWindowResize() {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
