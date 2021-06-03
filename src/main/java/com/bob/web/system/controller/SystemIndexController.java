@@ -5,10 +5,7 @@ import com.bob.common.constant.ShiroConstants;
 import com.bob.common.core.controller.BaseController;
 import com.bob.common.core.domain.AjaxResult;
 import com.bob.common.core.text.Convert;
-import com.bob.common.utils.DateUtils;
-import com.bob.common.utils.ServletUtils;
-import com.bob.common.utils.ShiroUtils;
-import com.bob.common.utils.StringUtils;
+import com.bob.common.utils.*;
 import com.bob.framework.shiro.service.SysPasswordService;
 import com.bob.web.system.domain.SystemMenu;
 import com.bob.web.system.domain.SystemUser;
@@ -18,11 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.List;
 
@@ -152,6 +151,15 @@ public class SystemIndexController extends BaseController {
         return "skin";
     }
 
+    /**
+     * 切换菜单样式
+     * @param style
+     * @param response
+     */
+    @GetMapping("/system/menuStyle/{style}")
+    public void menuStyle(@PathVariable String style, HttpServletResponse response) {
+        CookieUtils.setCookie(response, "nav-style", style);
+    }
 }
 
 

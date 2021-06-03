@@ -225,6 +225,20 @@
                     </ul>
                 </nav>
             </div>
+            <div class="row content-tabs">
+                <button class="roll-nav roll-left tabLeft">
+                    <i class="fa fa-backward"></i>
+                </button>
+                <nav class="page-tabs menuTabs">
+                    <div class="page-tabs-content">
+                        <a href="javascript:;" class="active menuTab" th:data-id="@{/system/main}">首页</a>
+                    </div>
+                </nav>
+                <button class="roll-nav roll-right tabRight">
+                    <i class="fa fa-forward"></i>
+                </button>
+                <a href="javascript:void(0);" class="roll-nav roll-right tabReload"><i class="fa fa-refresh"></i> 刷新</a>
+            </div>
         </div>
         <!-- 右侧导航栏结束 -->
     </div>
@@ -296,8 +310,8 @@
             $.modal.confirm("确认要切换横向菜单吗？",function () {
                 $.get(ctx + "system/menuStyle/topnav", function () {
                     window.location.reload();
-                })
-            })
+                });
+            });
         }
 
         /**
