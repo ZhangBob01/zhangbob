@@ -1,7 +1,5 @@
 package com.bob.framework.shiro.service;
 
-import java.io.Serializable;
-
 import com.bob.common.utils.StringUtils;
 import com.bob.framework.shiro.session.OnlineSession;
 import com.bob.web.system.domain.SystemUserOnline;
@@ -9,6 +7,8 @@ import com.bob.web.system.service.SystemUserOnlineService;
 import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 
 
 /**

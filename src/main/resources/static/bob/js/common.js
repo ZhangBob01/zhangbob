@@ -234,7 +234,7 @@ $(function() {
 var refreshItem = function(){
     var topWindow = $(window.parent.document);
     var currentId = $('.page-tabs-content', topWindow).find('.active').attr('data-id');
-    var target = $('.RuoYi_iframe[data-id="' + currentId + '"]', topWindow);
+    var target = $('.Bob_iframe[data-id="' + currentId + '"]', topWindow);
     var url = target.attr('src');
     target.attr('src', url).ready();
 }
@@ -247,16 +247,16 @@ var closeItem = function(dataId){
 	    // 根据dataId关闭指定选项卡
 	    $('.menuTab[data-id="' + dataId + '"]', topWindow).remove();
 	    // 移除相应tab对应的内容区
-	    $('.mainContent .RuoYi_iframe[data-id="' + dataId + '"]', topWindow).remove();
+	    $('.mainContent .Bob_iframe[data-id="' + dataId + '"]', topWindow).remove();
 	    return;
 	}
 	var panelUrl = window.frameElement.getAttribute('data-panel');
 	$('.page-tabs-content .active i', topWindow).click();
 	if($.common.isNotEmpty(panelUrl)){
 	    $('.menuTab[data-id="' + panelUrl + '"]', topWindow).addClass('active').siblings('.menuTab').removeClass('active');
-	    $('.mainContent .RuoYi_iframe', topWindow).each(function() {
+	    $('.mainContent .Bob_iframe', topWindow).each(function() {
 	        if ($(this).data('id') == panelUrl) {
-	            $(this).show().siblings('.RuoYi_iframe').hide();
+	            $(this).show().siblings('.Bob_iframe').hide();
 	            return false;
             }
         });
@@ -278,9 +278,9 @@ function createMenuItem(dataUrl, menuName, isRefresh) {
                 scrollToTab(this);
                 $('.page-tabs-content').animate({ marginLeft: ""}, "fast");
                 // 显示tab对应的内容区
-                $('.mainContent .RuoYi_iframe', topWindow).each(function() {
+                $('.mainContent .Bob_iframe', topWindow).each(function() {
                     if ($(this).data('id') == dataUrl) {
-                        $(this).show().siblings('.RuoYi_iframe').hide();
+                        $(this).show().siblings('.Bob_iframe').hide();
                         return false;
                     }
                 });
@@ -298,8 +298,8 @@ function createMenuItem(dataUrl, menuName, isRefresh) {
         $('.menuTab', topWindow).removeClass('active');
 
         // 添加选项卡对应的iframe
-        var str1 = '<iframe class="RuoYi_iframe" name="iframe' + dataIndex + '" width="100%" height="100%" src="' + dataUrl + '" frameborder="0" data-id="' + dataUrl + '" data-panel="' + panelUrl + '" seamless></iframe>';
-        $('.mainContent', topWindow).find('iframe.RuoYi_iframe').hide().parents('.mainContent').append(str1);
+        var str1 = '<iframe class="Bob_iframe" name="iframe' + dataIndex + '" width="100%" height="100%" src="' + dataUrl + '" frameborder="0" data-id="' + dataUrl + '" data-panel="' + panelUrl + '" seamless></iframe>';
+        $('.mainContent', topWindow).find('iframe.Bob_iframe').hide().parents('.mainContent').append(str1);
         
         window.parent.$.modal.loading("数据加载中，请稍后...");
         $('.mainContent iframe:visible', topWindow).load(function () {
@@ -317,7 +317,7 @@ function createMenuItem(dataUrl, menuName, isRefresh) {
 function refreshTab() {
 	var topWindow = $(window.parent.document);
 	var currentId = $('.page-tabs-content', topWindow).find('.active').attr('data-id');
-	var target = $('.RuoYi_iframe[data-id="' + currentId + '"]', topWindow);
+	var target = $('.Bob_iframe[data-id="' + currentId + '"]', topWindow);
     var url = target.attr('src');
 	target.attr('src', url).ready();
 }

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <!-- 兼容移动端 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <!-- 设置360极速模式 -->
+    <meta name="renderer" content="webkit">
+    <!-- 禁止ie开启兼容模式 -->
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+
+    <title>Index主页面</title>
+
+    <link rel="shortcut icon" href="favicn.ico">
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet">
+    <link href="../static/css/main/animate.min.css" th:href="@{/css/main/animate.min.css}" rel="stylesheet">
+    <link href="../static/css/main/style.min862f.css" th:href="@{/css/main/style.min862f.css}" rel="stylesheet">
+</head>
+<body class="gray-bg">
+    <div class="row border-bottom white-bg dashboard-header">
+        <!-- 上栏 -->
+        <div class="col-sm-12">
+            <blockquote class="text-warning" style="font-size: 14px">
+                简书
+                <br><a target="_blank" href="https://www.jianshu.com/">https://www.jianshu.com</a><br>
+                java技术栈
+                <br><a target="_blank" href="https://www.javastack.cn">https://www.javastack.cn</a><br>
+                产品壹佰
+                <br><a target="_blank" href="http://www.chanpin100.com/">http://www.chanpin100.com</a><br>
+                <h4 class="text-danger">测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</h4>
+            </blockquote>
+            <hr>
+        </div>
+        <!-- 左中栏 -->
+        <div class="col-sm-3">
+            <h2>Hello,Guest</h2>
+            <small></small>
+            <br>
+            <br>
+            <img th:src="@{/img/profile.jpg}" width="100%" style="max-width: 264px;">
+            <br>
+        </div>
+        <!-- 右中栏 -->
+        <div class="col-sm-5">
+            <h2>后台管理框架</h2>
+            <p>在网上找了好多后台框架，最后觉得这款还不错，用于研究底层实现，学习新的技术；感谢此框架。这框框架可用于全部应用程序，包含：<b>管理后台</b>，<b>业务系统</b>，<b>办公系统</b>，<b>内容管理系统</b></p>
+            <p><b>版本号：</b><span>v[[${version}]]</span></p>
+            <p><span class="label label-warning">用于学习</span></p>
+            <br>
+            <p>
+                <a class="btn btn-success btn-outline" href="#" target="_self"><i class="fa fa-cloud"></i>暂无地址 </a>
+                <a class="btn btn-white btn-bitbucket" href="#" target="_self"><i class="fa fa-home"></i> 访问主页 </a>
+            </p>
+        </div>
+        <div class="col-sm-4">
+            <h4>技术选型：</h4>
+            <ol>
+                <li>核心框架：Spring Boot。</li>
+                <li>安全框架：Apache Shiro。</li>
+                <li>模板引擎：Thymeleaf。</li>
+                <li>持久层框架：MyBatis。</li>
+                <li>定时任务:Quartz。</li>
+                <li>数据库连接池：Druid。</li>
+                <li>工具类：Fastjson。</li>
+                <li>更多……</li>
+            </ol>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-4">
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>联系信息</h5>
+
+                    </div>
+                    <div class="ibox-content">
+                        <p><i class="fa fa-send-o"></i> 官网：<a href="http://www.ruoyi.vip" target="_blank">http://www.ruoyi.vip</a>
+                        </p>
+                        <p><i class="fa fa-qq"></i> QQ群：<s>满1389287</s> <s>满1679294</s> <s>满1529866</s> <s>满1772718</s> <s>满1366522</s> <s>满1382251</s> <s>满1145125</s> <s>满86752435</s> <s>满134072510</s> <s>满210336300</s> <s>满339522636</s> <s>满130035985</s> <a href="https://jq.qq.com/?_wv=1027&k=4NsjKbtU" target="_blank">143151071</a>
+                        </p>
+                        <p><i class="fa fa-weixin"></i> 微信：<a href="javascript:;">/ *若依</a>
+                        </p>
+                        <p><i class="fa fa-credit-card"></i> 支付宝：<a href="javascript:;" class="支付宝信息">/ *若依</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>更新日志</h5>
+                    </div>
+                    <div class="ibox-content no-padding">
+                        <div class="panel-body">
+                            <div class="panel-group" id="version">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h5 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#version" href="#v46">v4.6.0</a><code class="pull-right">2021.01.01</code>
+                                        </h5>
+                                    </div>
+                                    <div id="v46" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <ol>
+                                                <li>新增缓存监控管理</li>
+                                                <li>新增锁定屏幕功能</li>
+                                                <li>菜单新增是否刷新页面</li>
+                                                <li>删除用户和角色解绑关联</li>
+                                                <li>新增密码强度字符范围提示</li>
+                                                <li>防止匿名访问进行过滤</li>
+                                                <li>升级SpringBoot到最新版本2.2.12</li>
+                                                <li>升级poi到最新版本4.1.2</li>
+                                                <li>升级bitwalker到最新版本1.21</li>
+                                                <li>升级bootstrap-fileinput到最新版本5.1.3</li>
+                                                <li>升级bootstrapTable到最新版本v1.18.0</li>
+                                                <li>升级bootstrapTable相关组件到最新版本v1.18.0</li>
+                                                <li>升级oshi到最新版本v5.3.6</li>
+                                                <li>新增示例（标签 & 提示）</li>
+                                                <li>添加单据打印示例</li>
+                                                <li>修改表格初始参数sortName默认值为undefined</li>
+                                                <li>新增表格参数（自定义打印页面模板printPageBuilder）</li>
+                                                <li>新增表格参数（是否显示行间隔色striped）</li>
+                                                <li>新增表格参数（渲染完成后执行的事件onPostBody）</li>
+                                                <li>Excel注解支持Image图片导出</li>
+                                                <li>Excel支持注解align对齐方式</li>
+                                                <li>Excel支持导入Boolean型数据</li>
+                                                <li>主子表操作添加通用addColumn方法</li>
+                                                <li>代码生成日期控件区分范围</li>
+                                                <li>代码生成数据库文本类型生成表单文本域</li>
+                                                <li>修复生成主子表外键名错误</li>
+                                                <li>选项卡新增是否刷新属性</li>
+                                                <li>修复树表格表头跟表格宽度不同步的问题</li>
+                                                <li>表格树加载完成触发tooltip方法</li>
+                                                <li>使用widthUnit定义树表格选项单位</li>
+                                                <li>修复主子表editColumn序列问题</li>
+                                                <li>修复添加全屏在无参数时没有替换url参数问题</li>
+                                                <li>弹出层openOptions移动端自适应</li>
+                                                <li>防止错误页返回主页出现嵌套问题</li>
+                                                <li>设置回显数据字典验证防止空值</li>
+                                                <li>其他细节优化</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h5 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#version" href="#v451">v4.5.1</a><code class="pull-right">2020.11.18</code>
+                                        </h5>
+                                    </div>
+                                    <div id="v451" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                                <li>阻止任意文件下载漏洞</li>
+                                                <li>升级shiro到最新版1.7.0 阻止权限绕过漏洞</li>
+                                                <li>升级druid到最新版本v1.2.2</li>
+                                                <li>新增表格行触发事件（onCheck、onUncheck、onCheckAll、onUncheckAll）</li>
+                                                <li>修复多页签关闭非当前选项出现空白问题</li>
+                                                <li>代码生成预览支持高亮显示</li>
+                                                <li>mapperLocations配置支持分隔符</li>
+                                                <li>权限信息调整</li>
+                                                <li>个人中心头像和上传头像增加默认图片</li>
+                                                <li>全局配置类保持和其他应用命名相同</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h5 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#version" href="#v45">v4.5.0</a><code class="pull-right">2020.10.20</code>
+                                        </h5>
+                                    </div>
+                                    <div id="v45" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                                <li>新增菜单导航显示风格（default为左侧导航菜单，topnav为顶部导航菜单）</li>
+                                                <li>菜单&数据权限新增（展开/折叠 全选/全不选 父子联动）</li>
+                                                <li>账号密码支持自定义更新周期</li>
+                                                <li>初始密码支持自定义修改策略</li>
+                                                <li>新增校验用户修改新密码不能与旧密码相同</li>
+                                                <li>添加检查密码范围支持的特殊字符包括：~!@#$%^&*()-=_+</li>
+                                                <li>注册账号设置默认用户名称及密码最后更新时间</li>
+                                                <li>去除用户手机邮箱部门必填验证</li>
+                                                <li>新增日期格式化方法</li>
+                                                <li>代码生成添加bit类型</li>
+                                                <li>树结构加载添加callBack回调方法</li>
+                                                <li>修复用户管理页面滚动返回顶部条失效</li>
+                                                <li>修复代码生成模板文件上传组件缺少ctx的问题</li>
+                                                <li>限制系统内置参数不允许删除</li>
+                                                <li>新增表格列宽拖动插件</li>
+                                                <li>新增Ajax局部刷新demo</li>
+                                                <li>新增是否开启页脚功能</li>
+                                                <li>新增表格参数（通过自定义函数设置标题样式headerStyle）</li>
+                                                <li>新增表格参数（通过自定义函数设置页脚样式footerStyle）</li>
+                                                <li>修复窗体大小改变后浮动提示框失效问题</li>
+                                                <li>生成代码补充必填样式</li>
+                                                <li>生成页面时不忽略remark属性</li>
+                                                <li>字典数据列表页添加关闭按钮</li>
+                                                <li>Excel注解支持自动统计数据总和</li>
+                                                <li>升级springboot到2.1.17 提升安全性</li>
+                                                <li>升级pagehelper到最新版1.3.0</li>
+                                                <li>升级druid到最新版本v1.2.1</li>
+                                                <li>升级fastjson到最新版1.2.74</li>
+                                                <li>升级bootstrap-fileinput到最新版本5.1.2</li>
+                                                <li>升级oshi到最新版本v5.2.5</li>
+                                                <li>表单向导插件更换为jquery-smartwizard</li>
+                                                <li>修改主子表提交示例代码防止渲染失效</li>
+                                                <li>添加导入数据弹出窗体自定义宽高</li>
+                                                <li>用户信息参数返回忽略掉密码字段</li>
+                                                <li>优化关闭窗体添加index参数</li>
+                                                <li>回显数据字典（字符串数组）增加空值判断</li>
+                                                <li>修改前端密码长度校验和错误提示不符问题</li>
+                                                <li>AjaxResult重写put方法，以方便链式调用</li>
+                                                <li>增强验证码校验的语义，更易懂</li>
+                                                <li>导入excel整形值校验优化</li>
+                                                <li>Excel导出类型NUMERIC支持精度浮点类型</li>
+                                                <li>导出Excel调整targetAttr获取值方法，防止get方法不规范</li>
+                                                <li>输入框组验证错误后置图标提示颜色</li>
+                                                <li>上传媒体类型添加视频格式</li>
+                                                <li>数据权限判断参数类型</li>
+                                                <li>修正数据库字符串类型nvarchar</li>
+                                                <li>优化递归子节点</li>
+                                                <li>修复多表格搜索formId无效</li>
+                                                <li>其他细节优化</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h5 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#version" href="#v44">v4.4.0</a><code class="pull-right">2020.08.24</code>
+                                        </h5>
+                                    </div>
+                                    <div id="v44" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                                <li>升级bootstrapTable到最新版本1.17.1</li>
+                                                <li>升级shiro到最新版1.6.0 阻止权限绕过漏洞</li>
+                                                <li>升级fastjson到最新版1.2.73</li>
+                                                <li>代码生成支持同步数据库</li>
+                                                <li>代码生成支持富文本控件</li>
+                                                <li>用户密码支持自定义配置规则</li>
+                                                <li>新增表格自动刷新插件</li>
+                                                <li>新增表格打印配置插件</li>
+                                                <li>更换图片裁剪工具为cropper</li>
+                                                <li>Excel支持sort导出排序</li>
+                                                <li>代码生成支持自定义路径</li>
+                                                <li>代码生成支持选择上级菜单</li>
+                                                <li>代码生成支持上传控件</li>
+                                                <li>新增表格参数（自定义加载文本的字体大小loadingFontSize）</li>
+                                                <li>Excel注解支持设置BigDecimal精度&舍入规则</li>
+                                                <li>操作日志记录排除敏感属性字段</li>
+                                                <li>修复不同浏览器附件下载中文名乱码的问题</li>
+                                                <li>用户分配角色不允许选择超级管理员角色</li>
+                                                <li>更换表格冻结列插件</li>
+                                                <li>添加右侧冻结列示例</li>
+                                                <li>升级表格行编辑&移动端适应插件</li>
+                                                <li>修复更新表格插件后无法设置实例配置问题</li>
+                                                <li>修复更新表格插件后导致的主子表错误</li>
+                                                <li>修复页面存在多表格，回调函数res数据不正确问题</li>
+                                                <li>强退&过期清理登录帐号缓存会话</li>
+                                                <li>表格树标题内容支持html语义化标签</li>
+                                                <li>修复配置应用的访问路径首页页签重复问题</li>
+                                                <li>优化openTab打开时滚动到当前页签</li>
+                                                <li>表格请求方式method支持自定义配置</li>
+                                                <li>菜单页签联动优化</li>
+                                                <li>用户邮箱长度限制修改为50</li>
+                                                <li>主子表示例添加日期格式案例</li>
+                                                <li>修改表格行内编辑示例旧值参数</li>
+                                                <li>操作日志查询方式调整</li>
+                                                <li>唯一限制条件只返回单条数据</li>
+                                                <li>修改Excel设置STRING单元格类型</li>
+                                                <li>添加获取当前的环境配置方法</li>
+                                                <li>截取返回参数长度，防止超出异常</li>
+                                                <li>定时任务cron表达式验证</li>
+                                                <li>拆分表格插件，按需引入</li>
+                                                <li>多行文本框补齐必填错误提示背景</li>
+                                                <li>其他细节优化</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>测试</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="alert alert-warning">
+                            （点击图片放大）
+                        </div>
+                        <p id="pay-qrcode">
+                            <a href="javascript:;"><img th:src="@{/img/profile.jpg}" width="100%" alt="请使用手机支付宝或者微信扫码支付">
+                            </a>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+    <script type="text/javascript">
+        $("#pay-qrcode").click(function () {
+            var html = $(this).html();
+            parent.layer.open({
+                title: false,
+                type: 1,
+                closeBtn: false,
+                shadeClose: true,
+                area: ["600px", "360px"],
+                content: html
+            });
+        });
+    </script>
+</body>
+</html>

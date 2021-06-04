@@ -3,7 +3,6 @@ package com.bob.web.system.service.impl;
 import com.bob.web.system.domain.SystemUser;
 import com.bob.web.system.mapper.SystemUserMapper;
 import com.bob.web.system.service.SystemUserService;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

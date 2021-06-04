@@ -1,7 +1,6 @@
 package com.bob.common.core.controller;
 
 import com.bob.common.core.domain.AjaxResult;
-import static com.bob.common.core.domain.AjaxResult.Type;
 import com.bob.common.core.page.PageDomain;
 import com.bob.common.core.page.TableDataInfo;
 import com.bob.common.core.page.TableSupport;
@@ -19,6 +18,8 @@ import javax.servlet.http.HttpSession;
 import java.beans.PropertyEditorSupport;
 import java.util.Date;
 import java.util.List;
+
+import static com.bob.common.core.domain.AjaxResult.Type;
 
 /**
  * web层基础数据处理

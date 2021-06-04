@@ -1,8 +1,5 @@
 package com.bob.framework.shiro.session;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import com.bob.common.enums.OnlineStatus;
 import com.bob.framework.manager.AsyncManager;
 import com.bob.framework.manager.factory.AsyncFactory;
@@ -12,6 +9,9 @@ import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+
+import java.io.Serializable;
+import java.util.Date;
 
 
 /**

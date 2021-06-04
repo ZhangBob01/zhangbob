@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
@@ -159,6 +158,17 @@ public class SystemIndexController extends BaseController {
     @GetMapping("/system/menuStyle/{style}")
     public void menuStyle(@PathVariable String style, HttpServletResponse response) {
         CookieUtils.setCookie(response, "nav-style", style);
+    }
+
+    /**
+     * 主页面
+     * @param modelMap
+     * @return
+     */
+    @GetMapping("/system/main")
+    public String main(ModelMap modelMap) {
+        modelMap.put("version", BobConfig.getVersion());
+        return "main";
     }
 }
 

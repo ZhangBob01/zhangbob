@@ -1,13 +1,13 @@
 package com.bob.common.utils;
 
-import java.util.Iterator;
-import java.util.Set;
-
 import com.bob.common.utils.spring.SpringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
+
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Cache工具类

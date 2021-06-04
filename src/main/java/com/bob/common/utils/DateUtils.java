@@ -1,7 +1,5 @@
 package com.bob.common.utils;
 
-import org.apache.commons.lang3.time.DateFormatUtils;
-
 import java.lang.management.ManagementFactory;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

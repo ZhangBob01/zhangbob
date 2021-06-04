@@ -1,8 +1,5 @@
 package com.bob.framework.shiro.web.filter;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-
 import com.bob.common.constant.Constants;
 import com.bob.common.utils.MessageUtils;
 import com.bob.common.utils.ShiroUtils;
@@ -15,6 +12,9 @@ import com.bob.web.system.service.SystemUserOnlineService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.session.SessionException;
 import org.apache.shiro.subject.Subject;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 
 
 /**

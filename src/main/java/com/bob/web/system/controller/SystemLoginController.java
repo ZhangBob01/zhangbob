@@ -4,7 +4,6 @@ import com.bob.common.core.controller.BaseController;
 import com.bob.common.core.domain.AjaxResult;
 import com.bob.common.utils.ServletUtils;
 import com.bob.common.utils.StringUtils;
-import com.bob.web.system.domain.SystemUser;
 import com.bob.web.system.service.SystemUserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;

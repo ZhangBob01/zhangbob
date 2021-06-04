@@ -1,13 +1,19 @@
 package com.bob.common.config;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import javax.servlet.Filter;
-
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
+import com.bob.common.constant.Constants;
+import com.bob.common.utils.StringUtils;
+import com.bob.common.utils.spring.SpringUtils;
+import com.bob.framework.shiro.realm.UserRealm;
+import com.bob.framework.shiro.session.OnlineSessionDAO;
+import com.bob.framework.shiro.session.OnlineSessionFactory;
+import com.bob.framework.shiro.session.OnlineSessionFilter;
+import com.bob.framework.shiro.session.SyncOnlineSessionFilter;
+import com.bob.framework.shiro.web.filter.KickoutSessionFilter;
+import com.bob.framework.shiro.web.filter.LogoutFilter;
+import com.bob.framework.shiro.web.filter.captcha.CaptchaValidateFilter;
+import com.bob.framework.shiro.web.session.OnlineWebSessionManager;
+import com.bob.framework.shiro.web.session.SpringSessionValidationScheduler;
 import org.apache.commons.io.IOUtils;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
@@ -24,19 +30,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.bob.common.constant.Constants;
-import com.bob.common.utils.StringUtils;
-import com.bob.common.utils.spring.SpringUtils;
-import com.bob.framework.shiro.realm.UserRealm;
-import com.bob.framework.shiro.session.OnlineSessionDAO;
-import com.bob.framework.shiro.session.OnlineSessionFactory;
-import com.bob.framework.shiro.session.OnlineSessionFilter;
-import com.bob.framework.shiro.session.SyncOnlineSessionFilter;
-import com.bob.framework.shiro.web.filter.KickoutSessionFilter;
-import com.bob.framework.shiro.web.filter.LogoutFilter;
-import com.bob.framework.shiro.web.filter.captcha.CaptchaValidateFilter;
-import com.bob.framework.shiro.web.session.OnlineWebSessionManager;
-import com.bob.framework.shiro.web.session.SpringSessionValidationScheduler;
+import javax.servlet.Filter;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * @author: zhang bob

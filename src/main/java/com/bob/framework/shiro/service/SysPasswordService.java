@@ -1,8 +1,5 @@
 package com.bob.framework.shiro.service;
 
-import java.util.concurrent.atomic.AtomicInteger;
-import javax.annotation.PostConstruct;
-
 import com.bob.common.constant.Constants;
 import com.bob.common.constant.ShiroConstants;
 import com.bob.common.exception.user.UserPasswordNotMatchException;
@@ -17,6 +14,9 @@ import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 登录密码方法

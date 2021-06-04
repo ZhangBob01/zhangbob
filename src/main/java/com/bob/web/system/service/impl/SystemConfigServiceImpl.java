@@ -1,7 +1,5 @@
 package com.bob.web.system.service.impl;
 
-import javax.annotation.PostConstruct;
-
 import com.bob.common.constant.Constants;
 import com.bob.common.constant.UserConstants;
 import com.bob.common.core.text.Convert;
@@ -14,6 +12,7 @@ import com.bob.web.system.service.SystemConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 

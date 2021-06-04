@@ -1,7 +1,6 @@
 package com.bob.web.system.mapper;
 
 import com.bob.web.system.domain.SystemUser;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

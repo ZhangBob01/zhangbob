@@ -1,9 +1,5 @@
 package com.bob.framework.shiro.session;
 
-import java.io.IOException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-
 import com.bob.common.constant.ShiroConstants;
 import com.bob.common.enums.OnlineStatus;
 import com.bob.common.utils.ShiroUtils;
@@ -13,6 +9,10 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Value;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import java.io.IOException;
 
 
 /**

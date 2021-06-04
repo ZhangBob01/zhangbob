@@ -1,9 +1,9 @@
 package com.bob.common.config;
 
+import com.google.code.kaptcha.text.impl.DefaultTextCreator;
+
 import java.security.SecureRandom;
 import java.util.Random;
-
-import com.google.code.kaptcha.text.impl.DefaultTextCreator;
 
 /**
  * @author: zhang bob

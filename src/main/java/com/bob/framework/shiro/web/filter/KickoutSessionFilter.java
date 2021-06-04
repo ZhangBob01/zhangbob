@@ -1,19 +1,11 @@
 package com.bob.framework.shiro.web.filter;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.bob.common.constant.ShiroConstants;
 import com.bob.common.core.domain.AjaxResult;
 import com.bob.common.utils.ServletUtils;
 import com.bob.common.utils.ShiroUtils;
 import com.bob.web.system.domain.SystemUser;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.session.Session;
@@ -22,7 +14,15 @@ import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * 登录帐号控制过滤器
