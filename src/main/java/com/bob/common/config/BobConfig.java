@@ -33,7 +33,7 @@ public class BobConfig {
         return name;
     }
 
-    public static void setName(String name) {
+    public void setName(String name) {
         BobConfig.name = name;
     }
 
@@ -41,7 +41,7 @@ public class BobConfig {
         return version;
     }
 
-    public static void setVersion(String version) {
+    public void setVersion(String version) {
         BobConfig.version = version;
     }
 
@@ -49,7 +49,7 @@ public class BobConfig {
         return copyrightYear;
     }
 
-    public static void setCopyrightYear(String copyrightYear) {
+    public void setCopyrightYear(String copyrightYear) {
         BobConfig.copyrightYear = copyrightYear;
     }
 
@@ -57,7 +57,7 @@ public class BobConfig {
         return demoEnabled;
     }
 
-    public static void setDemoEnabled(boolean demoEnabled) {
+    public void setDemoEnabled(boolean demoEnabled) {
         BobConfig.demoEnabled = demoEnabled;
     }
 
@@ -65,7 +65,7 @@ public class BobConfig {
         return profile;
     }
 
-    public static void setProfile(String profile) {
+    public void setProfile(String profile) {
         BobConfig.profile = profile;
     }
 
@@ -73,7 +73,7 @@ public class BobConfig {
         return addressEnabled;
     }
 
-    public static void setAddressEnabled(boolean addressEnabled) {
+    public void setAddressEnabled(boolean addressEnabled) {
         BobConfig.addressEnabled = addressEnabled;
     }
 
