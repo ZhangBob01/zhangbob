@@ -57,7 +57,7 @@
     ${params.dataScope}
     </select>
 
-    <select id="findRolesByUserId" parameterType="Long" resultMap="SysRoleResult">
+    <select id="findRoleListByUserId" parameterType="Long" resultMap="SysRoleResult">
     <include refid="selectRoleContactVo"/>
     WHERE r.del_flag = '0' and ur.user_id = #{userId}
     </select>

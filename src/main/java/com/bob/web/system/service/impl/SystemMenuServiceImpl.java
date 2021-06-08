@@ -27,7 +27,7 @@ public class SystemMenuServiceImpl implements SystemMenuService {
 
         List<SystemMenu> systemMenuList = new ArrayList<>();
         // 检查用户是否为管理员
-        if ("admin".equals(systemUser.getLoginName())) {
+        if (systemUser.isAdmin()) {
             systemMenuList = systemMenuMapper.findMenuListAll();
         } else {
             systemMenuList = systemMenuMapper.findMenuListByUserId(systemUser.getUserId());

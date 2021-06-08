@@ -25,4 +25,18 @@ public interface SystemUserService {
      * @param user
      */
     int updateUserInfo(SystemUser user);
+
+    /**
+     * 根据用户Id查询用户角色组
+     * @param userId
+     * @return
+     */
+    String findUserRoleGroup(Long userId);
+
+    /**
+     * 查询用户所属岗位组
+     * @param userId
+     * @return
+     */
+    String findUserPostGroup(Long userId);
 }

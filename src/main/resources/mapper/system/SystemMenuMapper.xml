@@ -32,8 +32,11 @@
 
     <!-- 查询所有菜单 -->
     <select id="findMenuListAll" resultMap="BaseResultMap">
-        <include refid="Base_Column_List"/>
-        order by parent_id, order_num
+        select distinct m.menu_id, m.parent_id, m.menu_name, m.url, m.visible, m.is_refresh, ifnull(m.perms,'') as perms,
+            m.target, m.menu_type, m.icon, m.order_num, m.create_time
+		from sys_menu m
+		where m.menu_type in ('M', 'C') and m.visible = 0
+		order by m.parent_id, m.order_num
     </select>
 
     <!-- 根据用户Id查询菜单 -->
