@@ -39,4 +39,11 @@ public interface SystemUserService {
      * @return
      */
     String findUserPostGroup(Long userId);
+
+    /**
+     * 根据Id查询用户信息
+     * @param userId
+     * @return
+     */
+    SystemUser findUserById(Long userId);
 }

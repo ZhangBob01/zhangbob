@@ -77,4 +77,15 @@ public class SystemUserServiceImpl implements SystemUserService {
         });
         return stringJoiner.toString();
     }
+
+    /**
+     * 根据id查询用户信息
+     * @param userId
+     * @return
+     */
+    @Override
+    public SystemUser findUserById(Long userId) {
+
+        return systemUserMapper.findUserById(userId);
+    }
 }

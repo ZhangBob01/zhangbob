@@ -103,4 +103,9 @@
         </set>
         where user_id = #{userId}
     </update>
+
+    <select id="findUserById" parameterType="Long" resultMap="BaseResultMap">
+        <include refid="Base_Column_List"/>
+        where u.user_id = #{id}
+    </select>
 </mapper>

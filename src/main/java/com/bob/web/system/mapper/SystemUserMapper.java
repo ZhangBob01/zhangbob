@@ -28,4 +28,11 @@ public interface SystemUserMapper {
      * @return
      */
     int updateUser(SystemUser user);
+
+    /**
+     * 根据id查询用户信息
+     * @param userId
+     * @return
+     */
+    SystemUser findUserById(Long userId);
 }

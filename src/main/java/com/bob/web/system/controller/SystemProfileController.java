@@ -43,4 +43,18 @@ public class SystemProfileController extends BaseController {
         modelMap.put("postGroup", userService.findUserPostGroup(user.getUserId()));
         return prefix + "/profile";
     }
+
+    /**
+     * 修改用户头像
+     * @param modelMap
+     * @return
+     */
+    @GetMapping("/avatar")
+    public String avatar(ModelMap modelMap) {
+        // 获取登录用户
+        SystemUser user = ShiroUtils.getSysUser();
+        SystemUser reUser = userService.findUserById(user.getUserId());
+        modelMap.put("user", reUser);
+        return prefix + "/avatar";
+    }
 }
