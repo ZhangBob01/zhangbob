@@ -1,5 +1,7 @@
 package com.bob.web.system.service.impl;
 
+import com.bob.common.constant.UserConstants;
+import com.bob.common.utils.StringUtils;
 import com.bob.web.system.domain.SystemPost;
 import com.bob.web.system.domain.SystemRole;
 import com.bob.web.system.domain.SystemUser;
@@ -87,5 +89,49 @@ public class SystemUserServiceImpl implements SystemUserService {
     public SystemUser findUserById(Long userId) {
 
         return systemUserMapper.findUserById(userId);
+    }
+
+    /**
+     * 校验email是否唯一
+     * @param user
+     * @return
+     */
+    @Override
+    public String checkEmailUnique(SystemUser user) {
+        Long userId = StringUtils.isNull(user.getUserId()) ? -1L : user.getUserId();
+        // 根据email获取用户信息
+        List<SystemUser> systemUserList = systemUserMapper.findUserListByEmail(user.getEmail());
+
+        // 判断用户列表，若大于1则不唯一
+        if (systemUserList != null && systemUserList.size() > 1) {
+            return UserConstants.USER_EMAIL_NOT_UNIQUE;
+        }
+        // 判断用户列表，若等于1，切id不相等，则不唯一
+        if (systemUserList != null && systemUserList.size() == 1 && systemUserList.get(0).getUserId().longValue() != userId.longValue()) {
+            return UserConstants.USER_EMAIL_NOT_UNIQUE;
+        }
+        return UserConstants.USER_EMAIL_UNIQUE;
+    }
+
+    /**
+     * 校验手机号是否唯一
+     * @param user
+     * @return
+     */
+    @Override
+    public String checkPhoneUnique(SystemUser user) {
+        Long userId = StringUtils.isNull(user.getUserId()) ? -1L : user.getUserId();
+        // 根据手机号获取用户信息
+        List<SystemUser> systemUserList = systemUserMapper.findUserListByPhone(user.getPhonenumber());
+
+        // 判断用户列表，若大于1则不唯一
+        if (systemUserList != null && systemUserList.size() > 1) {
+            return UserConstants.USER_EMAIL_NOT_UNIQUE;
+        }
+        // 判断用户列表，若等于1，切id不相等，则不唯一
+        if (systemUserList != null && systemUserList.size() == 1 && systemUserList.get(0).getUserId().longValue() != userId.longValue()) {
+            return UserConstants.USER_EMAIL_NOT_UNIQUE;
+        }
+        return UserConstants.USER_EMAIL_UNIQUE;
     }
 }

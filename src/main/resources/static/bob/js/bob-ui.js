@@ -1142,11 +1142,11 @@ var table = {
         	                callback(result);
         	            }
         	            if (result.code == web_status.SUCCESS) {
-        	                $.modal.alertSuccess(result.msg)
+        	                $.modal.alertSuccess(result.message)
         	            } else if (result.code == web_status.WARNING) {
-	                        $.modal.alertWarning(result.msg)
+	                        $.modal.alertWarning(result.message)
         	            } else {
-	                    	$.modal.alertError(result.msg);
+	                    	$.modal.alertError(result.message);
 	                    }
         	            $.modal.closeLoading();
         	        }

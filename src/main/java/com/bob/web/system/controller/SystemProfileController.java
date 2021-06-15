@@ -1,6 +1,9 @@
 package com.bob.web.system.controller;
 
+import com.bob.common.annotation.Log;
 import com.bob.common.core.controller.BaseController;
+import com.bob.common.core.domain.AjaxResult;
+import com.bob.common.enums.BusinessType;
 import com.bob.common.utils.ShiroUtils;
 import com.bob.framework.shiro.service.SysPasswordService;
 import com.bob.web.system.domain.SystemUser;
@@ -10,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author: zhang bob
@@ -57,4 +62,28 @@ public class SystemProfileController extends BaseController {
         modelMap.put("user", reUser);
         return prefix + "/avatar";
     }
+
+    /**
+     * 更新用户基本信息
+     * @param user
+     * @return
+     */
+    @Log(title = "个人信息", businessType = BusinessType.UPDATE)
+    @PostMapping("/update")
+    @ResponseBody
+    public AjaxResult update(SystemUser user) {
+        SystemUser loginUser = ShiroUtils.getSysUser();
+        loginUser.setUserName(user.getUserName());
+        loginUser.setEmail(user.getEmail());
+        loginUser.setPhonenumber(user.getPhonenumber());
+        loginUser.setSex(user.getSex());
+        int result = userService.updateUserInfo(loginUser);
+        if (result > 0) {
+            ShiroUtils.setSystemUser(loginUser);
+            return success();
+        }
+
+        return error();
+    }
+
 }

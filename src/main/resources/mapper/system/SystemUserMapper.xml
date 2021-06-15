@@ -108,4 +108,14 @@
         <include refid="Base_Column_List"/>
         where u.user_id = #{id}
     </select>
+
+    <select id="findUserListByEmail" parameterType="SystemUser" resultMap="BaseResultMap">
+        <include refid="Base_Column_List"/>
+        where u.email = #{email}
+    </select>
+
+    <select id="findUserListByPhone" parameterType="SystemUser" resultMap="BaseResultMap">
+        <include refid="Base_Column_List"/>
+        where u.phonenumber = #{phonenumber}
+    </select>
 </mapper>

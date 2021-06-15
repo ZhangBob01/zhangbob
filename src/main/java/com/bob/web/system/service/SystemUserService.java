@@ -46,4 +46,18 @@ public interface SystemUserService {
      * @return
      */
     SystemUser findUserById(Long userId);
+
+    /**
+     * 校验email地址是否唯一
+     * @param user
+     * @return
+     */
+    String checkEmailUnique(SystemUser user);
+
+    /**
+     * 校验手机号是否唯一
+     * @param user
+     * @return
+     */
+    String checkPhoneUnique(SystemUser user);
 }

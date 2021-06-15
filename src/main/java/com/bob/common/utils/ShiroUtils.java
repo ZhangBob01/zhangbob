@@ -4,6 +4,8 @@ import com.bob.common.utils.bean.BeanUtils;
 import com.bob.web.system.domain.SystemUser;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
 
 /**
@@ -21,6 +23,10 @@ public class ShiroUtils {
         return getSubject().getSession().getHost();
     }
 
+    /**
+     * 获取shiro用户信息
+     * @return
+     */
     public static SystemUser getSysUser() {
         SystemUser user = null;
         Object object = getSubject().getPrincipal();
@@ -37,5 +43,18 @@ public class ShiroUtils {
 
     public static Session getSession() {
         return SecurityUtils.getSubject().getSession();
+    }
+
+    /**
+     * 设置shiro用户信息
+     * @param user
+     */
+    public static void setSystemUser(SystemUser user) {
+        Subject subject = getSubject();
+        PrincipalCollection principalCollection = subject.getPrincipals();
+        String realmName = principalCollection.getRealmNames().iterator().next();
+        PrincipalCollection newPrincipalCollection = new SimplePrincipalCollection(user, realmName);
+        // 重新加载
+        subject.runAs(newPrincipalCollection);
     }
 }

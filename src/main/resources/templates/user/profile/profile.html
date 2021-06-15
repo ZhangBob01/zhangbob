@@ -158,19 +158,19 @@
          */
         function avatar() {
             // 注意：js中请求连接前不能加"/"
-            var url = ctx + "system/user/profile/avatar";
+            var url = ctx + 'system/user/profile/avatar';
             top.layer.open({
                 type: 2,
-                area: [$(window).width() + 'px', $(window).height + 'px'],
+                area: [$(window).width() + 'px', $(window).height() + 'px'],
                 fix: false,
                 // 是否固定：true不固定
                 maxmin: true,
                 shade: 0.3,
                 title: "修改头像",
                 content: url,
-                // 弹出区域外层
-                shadeClose: true,
                 btn: ['确定', '关闭'],
+                // 弹层外区域关闭
+                shadeClose: true,
                 yes: function (index, layero) {
                     var iframeWin = layero.find('iframe')[0];
                     iframeWin.contentWindow.submitHandler(index, layero);
@@ -180,9 +180,91 @@
                 }
             });
         }
+
+        $('#form-user-edit').validate({
+            onkeyup: false,
+            rules: {
+                userName: {
+                    required: true
+                },
+                email: {
+                    required: true,
+                    email: true,
+                    remote: {
+                        url: ctx + 'system/user/checkEmailUnique',
+                        type: 'post',
+                        dataType: 'json',
+                        async:false,
+                        cache:false,
+                        ifModified :true,
+                        data: {
+                            'userId': function () {
+                                return $('#userId').val();
+                            },
+                            'email': function () {
+                                return $.common.trim($('#email').val());
+                            }
+                        },
+                        dataFilter: function (data, type) {
+                            return $.validate.unique(data);
+                        }
+                    }
+                },
+                phonenumber: {
+                    required: true,
+                    isPhone: true,
+                    remote: {
+                        url: ctx + 'system/user/checkPhoneUnique',
+                        type: 'post',
+                        dataType: 'json',
+                        async:false,
+                        cache:false,
+                        ifModified :true,
+                        data: {
+                            'userId': function () {
+                                return $('#userId').val();
+                            },
+                            'phonenumber': function () {
+                                return $.common.trim($('#phonenumber').val());
+                            }
+                        },
+                        dataFilter: function (data, type) {
+                            return $.validate.unique(data);
+                        }
+                    }
+                }
+            },
+            message: {
+                'userName': {
+                    required: '请输入用户名'
+                },
+                'email': {
+                    required: '请输入邮箱',
+                    email: '请输入正确的邮箱',
+                    remote: 'email已经存在'
+                },
+                'phonenumber': {
+                    required: '请输入手机号码',
+                    isPhone: '请输入11位正确的手机号',
+                    remote: '手机号码已经存在'
+                }
+            },
+            focusCleanup: true
+        });
+
+        /**
+         * 保存基本资料
+         */
+        function submitUserInfo() {
+            debugger;
+            if ($.validate.form()) {
+                $.operate.saveModal(ctx + "system/user/profile/update", $('#form-user-edit').serialize());
+            }
+        }
+
+
     </script>
 </body>
-
 </html>
 
 
