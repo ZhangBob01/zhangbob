@@ -134,4 +134,14 @@ public class SystemUserServiceImpl implements SystemUserService {
         }
         return UserConstants.USER_EMAIL_UNIQUE;
     }
+
+    /**
+     * 更新用户密码
+     * @param user
+     * @return
+     */
+    @Override
+    public int resetUserPwd(SystemUser user) {
+        return updateUserInfo(user);
+    }
 }

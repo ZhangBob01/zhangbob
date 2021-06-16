@@ -3,10 +3,13 @@ package com.bob.common.utils;
 import com.bob.common.utils.bean.BeanUtils;
 import com.bob.web.system.domain.SystemUser;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
+
+import java.security.SecureRandom;
 
 /**
  * @author: zhang bob
@@ -56,5 +59,15 @@ public class ShiroUtils {
         PrincipalCollection newPrincipalCollection = new SimplePrincipalCollection(user, realmName);
         // 重新加载
         subject.runAs(newPrincipalCollection);
+    }
+
+    /**
+     * 随机生成校验盐
+     * @return
+     */
+    public static String randomSalt() {
+        SecureRandomNumberGenerator secureRandomNumberGenerator = new SecureRandomNumberGenerator();
+        String hox = secureRandomNumberGenerator.nextBytes(3).toHex();
+        return hox;
     }
 }

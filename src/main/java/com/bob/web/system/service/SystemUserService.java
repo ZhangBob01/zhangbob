@@ -60,4 +60,11 @@ public interface SystemUserService {
      * @return
      */
     String checkPhoneUnique(SystemUser user);
+
+    /**
+     * 更新用户密码
+     * @param user
+     * @return
+     */
+    int resetUserPwd(SystemUser user);
 }

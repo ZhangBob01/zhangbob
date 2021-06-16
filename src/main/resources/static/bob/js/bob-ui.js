@@ -1255,6 +1255,12 @@ var table = {
                 }
                 return false;
             },
+            zcheck: function (value) {
+                if (value == "0") {
+                    return true;
+                }
+                return false;
+            },
             // 表单验证
             form: function (formId) {
             	var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;

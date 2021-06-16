@@ -4,7 +4,7 @@
     <th:block th:include = "include::header('用户个人信息')"/>
     <style type="text/css">.user-info-head{position:relative;display:inline-block;}.user-info-head:hover:after{content:'\f030';position:absolute;left:0;right:0;top:0;bottom:0;color:#eee;background:rgba(0,0,0,0.5);font-family:FontAwesome;font-size:24px;font-style:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;cursor:pointer;line-height:110px;border-radius:50%;}</style>
 </head>
-<body class="grey-bg" style="font: 14px Helvetica Neue, Helvetica, PingFang SC, 微软雅黑, Tahoma, Arial, sans-serif !important; ">
+<body class="gray-bg" style="font: 14px Helvetica Neue, Helvetica, PingFang SC, 微软雅黑, Tahoma, Arial, sans-serif !important; ">
     <input type="hidden" id="userId" name="userId" th:value="${user.userId}" />
     <section class="section-content">
         <div class="row">
@@ -116,16 +116,16 @@
                                             <label class="col-sm-2 control-label">新密码：</label>
                                             <div class="col-sm-10">
                                                 <input type="password" class="form-control" name="newPassword" id="newPassword" placeholder="请输入新密码">
-<!--                                                <th:block th:with="chrtype=${@config.getKey('sys.account.chrtype')}">-->
-<!--                                                    <th:block th:if="${chrtype != '0'}">-->
-<!--						                            <span class="help-block m-b-none">-->
-<!--								                        <th:block th:if="${chrtype == '1'}"><i class="fa fa-info-circle" style="color: red;"></i>  密码只能为0-9数字 </th:block>-->
-<!--								                        <th:block th:if="${chrtype == '2'}"><i class="fa fa-info-circle" style="color: red;"></i>  密码只能为a-z和A-Z字母</th:block>-->
-<!--								                        <th:block th:if="${chrtype == '3'}"><i class="fa fa-info-circle" style="color: red;"></i>  密码必须包含（字母，数字）</th:block>-->
-<!--								                        <th:block th:if="${chrtype == '4'}"><i class="fa fa-info-circle" style="color: red;"></i>  密码必须包含（字母，数字，特殊字符!@#$%^&*()-=_+）</th:block>-->
-<!--						                            </span>-->
-<!--                                                    </th:block>-->
-<!--                                                </th:block>-->
+                                                <th:block th:with="chrtype=${@config.getKey('sys.account.chrtype')}">
+                                                    <th:block th:if="${chrtype != '0'}">
+						                            <span class="help-block m-b-none">
+								                        <th:block th:if="${chrtype == '1'}"><i class="fa fa-info-circle" style="color: red;"></i>  密码只能为0-9数字 </th:block>
+								                        <th:block th:if="${chrtype == '2'}"><i class="fa fa-info-circle" style="color: red;"></i>  密码只能为a-z和A-Z字母</th:block>
+								                        <th:block th:if="${chrtype == '3'}"><i class="fa fa-info-circle" style="color: red;"></i>  密码必须包含（字母，数字）</th:block>
+								                        <th:block th:if="${chrtype == '4'}"><i class="fa fa-info-circle" style="color: red;"></i>  密码必须包含（字母，数字，特殊字符!@#$%^&*()-=_+）</th:block>
+						                            </span>
+                                                    </th:block>
+                                                </th:block>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -234,7 +234,7 @@
                     }
                 }
             },
-            message: {
+            messages: {
                 'userName': {
                     required: '请输入用户名'
                 },
@@ -256,12 +256,74 @@
          * 保存基本资料
          */
         function submitUserInfo() {
-            debugger;
             if ($.validate.form()) {
                 $.operate.saveModal(ctx + "system/user/profile/update", $('#form-user-edit').serialize());
             }
         }
 
+        /**
+         * 修改密码
+         */
+        $('#form-user-resetPwd').validate({
+            onkeyup: false,
+            rules: {
+                oldPassword: {
+                    required: true,
+                    remote: {
+                        url: ctx + 'system/user/profile/checkPassword',
+                        type: 'get',
+                        dataType: 'json',
+                        async:false,
+                        cache:false,
+                        ifModified :true,
+                        data: {
+                            password: function () {
+                                return $("input[name='oldPassword']").val();
+                            }
+                        },
+                        dataFilter: function (data, type) {
+                            return $.validate.zcheck(data);
+                        }
+                    }
+                },
+                newPassword: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 20
+                },
+                confirmPassword: {
+                    required: true,
+                    equalTo: "#newPassword"
+                }
+            },
+            messages: {
+                oldPassword: {
+                    required: '请输入原密码',
+                    remote: '原密码错误'
+                },
+                newPassword: {
+                    required: '请输入新密码',
+                    minlength: '密码不能小于5位',
+                    maxlength: '密码不能大于20位',
+                },
+                confirmPassword: {
+                    required: '请再次输入新密码',
+                    equalTo: '两次密码输入不一致'
+                }
+            },
+            focusCleanup: true
+        });
+
+        /**
+         * 修改密码
+         */
+        function submitChangPassword() {
+            var chrtype = [[${#strings.defaultString(@config.getKey('sys.account.chrtype'), 0)}]];
+            var password = $("#newPassword").val();
+            if ($.validate.form("form-user-resetPwd") && checkpwd(chrtype, password)) {
+                $.operate.saveModal(ctx + "system/user/profile/resetPwd", $("#form-user-resetPwd").serialize());
+            }
+        }
 
     </script>
 </body>
