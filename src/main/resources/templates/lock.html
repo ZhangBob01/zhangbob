@@ -101,8 +101,8 @@
 
     <div class="lockscreen-item">
         <div class="lockscreen-image">
-            <img th:src="(${#strings.isEmpty(user.avatar)}) ? @{/img/profile.jpg} : @{${user.avatar}}"
-                 th:onerror="this.src='img/profile.jpg'" class="img-circle" alt="User Image">
+            <img th:src="(${#strings.isEmpty(user.avatar)}) ? @{/img/kelisiting.jpg} : @{${user.avatar}}"
+                 th:onerror="this.src='img/kelisiting.jpg'" class="img-circle" alt="User Image">
         </div>
         <form class="lockscreen-credentials" method="post" action="#" onsubmit="return false;">
             <div class="input-group">
@@ -191,7 +191,7 @@
                 if (result.code == web_status.SUCCESS) {
                     location.href = ctx + 'index';
                 } else {
-                    $.modal.msg(result.msg);
+                    $.modal.msg(result.message);
                     $("input[name='password']").val("");
                 }
                 layer.close(index);

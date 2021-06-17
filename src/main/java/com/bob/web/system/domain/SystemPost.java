@@ -10,7 +10,7 @@ import lombok.Data;
  */
 @Data
 public class SystemPost extends BaseEntity {
-    private static final long serialVersionUID = 1l;
+    private static final long serialVersionUID = 1L;
 
     /** 岗位表Id. */
     private Long postId;
