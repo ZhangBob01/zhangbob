@@ -117,7 +117,7 @@ public class SystemProfileController extends BaseController {
         SystemUser user = ShiroUtils.getSysUser();
 
         modelMap.put("user", user);
-        return prefix + "resetPwd";
+        return prefix + "/resetPwd";
     }
 
     @Log(title = "重置密码", businessType = BusinessType.UPDATE)
