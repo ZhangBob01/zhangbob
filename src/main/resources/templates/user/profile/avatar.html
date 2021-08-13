@@ -176,7 +176,7 @@
                 aspectRatio: 1,
                 viewMode: 1,
                 autoCropArea: 0.9,
-                preview: 'img-preview',
+                preview: '.img-preview',
                 ready: function () {
                     croppable = true;
                 }
@@ -198,6 +198,7 @@
             });
 
             $('.btn-custom').on('click',function (e) {
+                debugger;
                 if (!croppable) {
                     $.modal.alertWarning("裁剪框加载中,请稍后...");
                     return;
