@@ -16,7 +16,7 @@ bob:
 
 # 开发环境配置
 server:
-  port: 8010
+  port: 80
   servlet:
     context-path: /
   tomcat:
