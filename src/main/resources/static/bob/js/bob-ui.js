@@ -186,7 +186,7 @@ var table = {
                         return { rows: res.rows, total: res.total };
                     }
                 } else {
-                    $.modal.alertWarning(res.msg);
+                    $.modal.alertWarning(res.message);
                     return { rows: [], total: 0 };
                 }
             },
@@ -365,11 +365,11 @@ var table = {
                     $.modal.loading("正在导出数据，请稍后...");
                     $.post(table.options.exportUrl, dataParam, function(result) {
                         if (result.code == web_status.SUCCESS) {
-                            window.location.href = ctx + "common/download?fileName=" + encodeURI(result.msg) + "&delete=" + true;
+                            window.location.href = ctx + "common/download?fileName=" + encodeURI(result.message) + "&delete=" + true;
                         } else if (result.code == web_status.WARNING) {
-                            $.modal.alertWarning(result.msg)
+                            $.modal.alertWarning(result.message)
                         } else {
-                            $.modal.alertError(result.msg);
+                            $.modal.alertError(result.message);
                         }
                         $.modal.closeLoading();
                     });
@@ -380,11 +380,11 @@ var table = {
                 table.set();
                 $.get(table.options.importTemplateUrl, function(result) {
                     if (result.code == web_status.SUCCESS) {
-                        window.location.href = ctx + "common/download?fileName=" + encodeURI(result.msg) + "&delete=" + true;
+                        window.location.href = ctx + "common/download?fileName=" + encodeURI(result.message) + "&delete=" + true;
                     } else if (result.code == web_status.WARNING) {
-                        $.modal.alertWarning(result.msg)
+                        $.modal.alertWarning(result.message)
                     } else {
-                        $.modal.alertError(result.msg);
+                        $.modal.alertError(result.message);
                     }
                 });
             },
@@ -425,16 +425,16 @@ var table = {
                             success: function (result) {
                                 if (result.code == web_status.SUCCESS) {
                                     $.modal.closeAll();
-                                    $.modal.alertSuccess(result.msg);
+                                    $.modal.alertSuccess(result.message);
                                     $.table.refresh();
                                 } else if (result.code == web_status.WARNING) {
                                     layer.close(index);
                                     $.modal.enable();
-                                    $.modal.alertWarning(result.msg)
+                                    $.modal.alertWarning(result.message)
                                 } else {
                                     layer.close(index);
                                     $.modal.enable();
-                                    $.modal.alertError(result.msg);
+                                    $.modal.alertError(result.message);
                                 }
                             }
                         });
@@ -614,7 +614,7 @@ var table = {
                     table.options.responseHandler(res);
                 }
             	if (res.code != undefined && res.code != web_status.SUCCESS) {
-                    $.modal.alertWarning(res.msg);
+                    $.modal.alertWarning(res.message);
                     return [];
                 } else {
                     return res;
@@ -1175,17 +1175,17 @@ var table = {
             // 保存结果弹出msg刷新table表格
             ajaxSuccess: function (result) {
             	if (result.code == web_status.SUCCESS && table.options.type == table_type.bootstrapTable) {
-            	    $.modal.msgSuccess(result.msg);
+            	    $.modal.msgSuccess(result.message);
             	    $.table.refresh();
                 } else if (result.code == web_status.SUCCESS && table.options.type == table_type.bootstrapTreeTable) {
-            	    $.modal.msgSuccess(result.msg);
+            	    $.modal.msgSuccess(result.message);
             	    $.treeTable.refresh();
                 } else if (result.code == web_status.SUCCESS && $.common.isEmpty(table.options.type)) {
-            	    $.modal.msgSuccess(result.msg)
+            	    $.modal.msgSuccess(result.message)
                 }  else if (result.code == web_status.WARNING) {
-            	    $.modal.alertWarning(result.msg)
+            	    $.modal.alertWarning(result.message)
                 }  else {
-            	    $.modal.alertError(result.msg);
+            	    $.modal.alertError(result.message);
                 }
             	$.modal.closeLoading();
             },
@@ -1194,9 +1194,9 @@ var table = {
             	if (result.code == web_status.SUCCESS) {
             	    $.modal.msgReload("保存成功,正在刷新数据请稍后……", modal_status.SUCCESS);
                 } else if (result.code == web_status.WARNING) {
-            	    $.modal.alertWarning(result.msg)
+            	    $.modal.alertWarning(result.message)
                 }  else {
-            	    $.modal.alertError(result.msg);
+            	    $.modal.alertError(result.message);
                 }
             	$.modal.closeLoading();
             },
@@ -1206,19 +1206,19 @@ var table = {
                     var parent = window.parent;
                     if (parent.table.options.type == table_type.bootstrapTable) {
                         $.modal.close();
-                        parent.$.modal.msgSuccess(result.msg);
+                        parent.$.modal.msgSuccess(result.message);
                         parent.$.table.refresh();
                     } else if (parent.table.options.type == table_type.bootstrapTreeTable) {
                         $.modal.close();
-                        parent.$.modal.msgSuccess(result.msg);
+                        parent.$.modal.msgSuccess(result.message);
                         parent.$.treeTable.refresh();
                     } else {
                         $.modal.msgReload("保存成功,正在刷新数据请稍后……", modal_status.SUCCESS);
                     }
                 } else if (result.code == web_status.WARNING) {
-                    $.modal.alertWarning(result.msg)
+                    $.modal.alertWarning(result.message)
                 }  else {
-                    $.modal.alertError(result.msg);
+                    $.modal.alertError(result.message);
                 }
                 $.modal.closeLoading();
                 $.modal.enable();
@@ -1230,7 +1230,7 @@ var table = {
     	            var currentId = $('.page-tabs-content', topWindow).find('.active').attr('data-panel');
     	            var $contentWindow = $('.Bob_iframe[data-id="' + currentId + '"]', topWindow)[0].contentWindow;
     	            $.modal.close();
-    	            $contentWindow.$.modal.msgSuccess(result.msg);
+    	            $contentWindow.$.modal.msgSuccess(result.message);
     	            $contentWindow.$(".layui-layer-padding").removeAttr("style");
     	            if ($contentWindow.table.options.type == table_type.bootstrapTable) {
     	                $contentWindow.$.table.refresh();
@@ -1239,9 +1239,9 @@ var table = {
     	            }
     	            $.modal.closeTab();
                 } else if (result.code == web_status.WARNING) {
-                    $.modal.alertWarning(result.msg)
+                    $.modal.alertWarning(result.message)
                 } else {
-                    $.modal.alertError(result.msg);
+                    $.modal.alertError(result.message);
                 }
                 $.modal.closeLoading();
             }

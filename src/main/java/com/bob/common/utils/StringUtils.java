@@ -284,4 +284,16 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     public static boolean isNotNUll(Object object) {
         return !isNull(object);
     }
+
+    /**
+     * 转换
+     * @param obj
+     * @return
+     * @param <T>
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T cast(Object obj)
+    {
+        return (T) obj;
+    }
 }

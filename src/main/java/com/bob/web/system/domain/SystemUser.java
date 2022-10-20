@@ -56,6 +56,19 @@ public class SystemUser extends BaseEntity {
     private SystemDept systemDept;
     /** 角色列表. */
     private List<SystemRole> roles;
+    /** 角色组 */
+    private Long[] roleIds;
+    /**
+     * 岗位组
+     */
+    private Long[] postIds;
+
+    public SystemUser() {
+    }
+
+    public SystemUser(Long userId) {
+        this.userId = userId;
+    }
 
     public boolean isAdmin() {
         return isAdmin(this.userId);

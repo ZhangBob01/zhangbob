@@ -28,6 +28,7 @@ public class ShiroUtils {
 
     /**
      * 获取shiro用户信息
+     *
      * @return
      */
     public static SystemUser getSysUser() {
@@ -50,6 +51,7 @@ public class ShiroUtils {
 
     /**
      * 设置shiro用户信息
+     *
      * @param user
      */
     public static void setSystemUser(SystemUser user) {
@@ -63,11 +65,16 @@ public class ShiroUtils {
 
     /**
      * 随机生成校验盐
+     *
      * @return
      */
     public static String randomSalt() {
         SecureRandomNumberGenerator secureRandomNumberGenerator = new SecureRandomNumberGenerator();
         String hox = secureRandomNumberGenerator.nextBytes(3).toHex();
         return hox;
+    }
+
+    public static String getLoginName() {
+        return getSysUser().getLoginName();
     }
 }

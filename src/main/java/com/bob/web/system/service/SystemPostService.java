@@ -1,26 +1,20 @@
-package com.bob.web.system.mapper;
+package com.bob.web.system.service;
 
 import com.bob.web.system.domain.SystemPost;
 
 import java.util.List;
 
 /**
- * 岗位信息 数据层
+ * @author: zhang bob
+ * @date: 2022-10-19 19:13
+ * @description: 岗位信息 服务层
  */
-public interface SystemPostMapper {
-
+public interface SystemPostService {
     /**
-     * 根据用户id查询岗位列表
-     * @param userId
-     * @return
-     */
-    List<SystemPost> findPostListByUserId(Long userId);
-
-    /**
-     * 查询岗位数据集合
+     * 查询岗位信息集合
      *
      * @param post 岗位信息
-     * @return 岗位数据集合
+     * @return 岗位信息集合
      */
     List<SystemPost> selectPostList(SystemPost post);
 
@@ -52,19 +46,12 @@ public interface SystemPostMapper {
      *
      * @param ids 需要删除的数据ID
      * @return 结果
+     * @throws Exception 异常
      */
-    int deletePostByIds(Long[] ids);
+    int deletePostByIds(String ids) throws Exception;
 
     /**
-     * 修改岗位信息
-     *
-     * @param post 岗位信息
-     * @return 结果
-     */
-    int updatePost(SystemPost post);
-
-    /**
-     * 新增岗位信息
+     * 新增保存岗位信息
      *
      * @param post 岗位信息
      * @return 结果
@@ -72,18 +59,34 @@ public interface SystemPostMapper {
     int insertPost(SystemPost post);
 
     /**
-     * 校验岗位名称
+     * 修改保存岗位信息
      *
-     * @param postName 岗位名称
+     * @param post 岗位信息
      * @return 结果
      */
-    SystemPost checkPostNameUnique(String postName);
+    int updatePost(SystemPost post);
+
+    /**
+     * 通过岗位ID查询岗位使用数量
+     *
+     * @param postId 岗位ID
+     * @return 结果
+     */
+    int countUserPostById(Long postId);
+
+    /**
+     * 校验岗位名称
+     *
+     * @param post 岗位信息
+     * @return 结果
+     */
+    String checkPostNameUnique(SystemPost post);
 
     /**
      * 校验岗位编码
      *
-     * @param postCode 岗位编码
+     * @param post 岗位信息
      * @return 结果
      */
-    SystemPost checkPostCodeUnique(String postCode);
+    String checkPostCodeUnique(SystemPost post);
 }

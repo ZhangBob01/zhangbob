@@ -135,12 +135,18 @@
             <version>1.21</version>
         </dependency>
 
-        <!-- -->
+        <!-- 阿里json -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
         </dependency>
+        <!-- 自定义验证注解 -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+
 
 
     </dependencies>

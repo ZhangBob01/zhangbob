@@ -51,5 +51,5 @@ public class SystemMenu extends BaseEntity {
     /** 菜单图标. */
     private String icon;
     /** 子菜单 */
-    private List<SystemMenu> children = new ArrayList<SystemMenu>();
+    private List<SystemMenu> children = new ArrayList<>();
 }
