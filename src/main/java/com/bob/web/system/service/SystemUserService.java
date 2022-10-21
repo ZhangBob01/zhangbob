@@ -117,4 +117,12 @@ public interface SystemUserService {
      * @param user 用户信息
      */
     void checkUserAllowed(SystemUser user);
+
+    /**
+     * 根据id批量删除用户
+     *
+     * @param ids 要删除的用户id数组
+     * @return
+     */
+    int deleteUserByIds(String ids);
 }

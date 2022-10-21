@@ -50,6 +50,9 @@ public class SystemUserController extends BaseController {
 
     /**
      * 校验用户名
+     *
+     * @param user
+     * @return
      */
     @PostMapping("/checkLoginNameUnique")
     @ResponseBody
@@ -60,6 +63,7 @@ public class SystemUserController extends BaseController {
 
     /**
      * 校验email是否唯一
+     *
      * @param user
      * @return
      */
@@ -71,6 +75,7 @@ public class SystemUserController extends BaseController {
 
     /**
      * 校验手机号是否唯一
+     *
      * @param user
      * @return
      */
@@ -97,6 +102,7 @@ public class SystemUserController extends BaseController {
 
     /**
      * 新增用户
+     *
      * @param modelMap
      * @return
      */
@@ -109,6 +115,7 @@ public class SystemUserController extends BaseController {
 
     /**
      * 新增保存用户
+     *
      * @param user
      * @return
      */
@@ -134,6 +141,7 @@ public class SystemUserController extends BaseController {
 
     /**
      * 修改用户
+     *
      * @param userId
      * @param modelMap
      * @return
@@ -149,6 +157,9 @@ public class SystemUserController extends BaseController {
 
     /**
      * 修改保存用户
+     *
+     * @param user
+     * @return
      */
     @RequiresPermissions("system:user:edit")
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
@@ -166,5 +177,19 @@ public class SystemUserController extends BaseController {
         user.setUpdateBy(ShiroUtils.getLoginName());
         AjaxResult ajaxResult = toAjax(userService.updateUser(user));
         return ajaxResult;
+    }
+
+    /**
+     * 删除用户
+     *
+     * @param ids
+     * @return
+     */
+    @RequiresPermissions("system:user:remove")
+    @Log(title = "用户管理", businessType = BusinessType.DELETE)
+    @PostMapping("/remove")
+    @ResponseBody
+    public AjaxResult remove(String ids) {
+        return toAjax(userService.deleteUserByIds(ids));
     }
 }

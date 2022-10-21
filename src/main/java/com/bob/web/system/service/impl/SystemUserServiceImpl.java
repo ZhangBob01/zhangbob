@@ -1,6 +1,7 @@
 package com.bob.web.system.service.impl;
 
 import com.bob.common.constant.UserConstants;
+import com.bob.common.core.text.Convert;
 import com.bob.common.exception.BusinessException;
 import com.bob.common.utils.StringUtils;
 import com.bob.web.system.domain.*;
@@ -273,6 +274,26 @@ public class SystemUserServiceImpl implements SystemUserService {
         if (StringUtils.isNotNUll(user.getUserId()) && user.isAdmin()) {
             throw new BusinessException("不允许操作超级管理员用户");
         }
+    }
+
+    /**
+     * 根据用户id批量删除用户
+     *
+     * @param ids
+     * @return
+     */
+    @Override
+    @Transactional
+    public int deleteUserByIds(String ids) {
+        Long[] userIds = Convert.toLongArray(ids);
+        for (Long userId : userIds) {
+            checkUserAllowed(new SystemUser(userId));
+        }
+        // 删除用户与角色关联
+        userRoleMapper.deleteUserRole(userIds);
+        // 删除用户与岗位关联
+        userPostMapper.deleteUserPost(userIds);
+        return systemUserMapper.deleteUserByIds(userIds);
     }
 
 }

@@ -23,6 +23,7 @@
         <thymeleaf.extras.shiro.version>2.0.0</thymeleaf.extras.shiro.version>
         <commons.io.version>2.5</commons.io.version>
         <fastjson.version>1.2.74</fastjson.version>
+        <aspectj.version>1.8.9</aspectj.version>
     </properties>
 
     <dependencies>
@@ -145,6 +146,12 @@
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
+        </dependency>
+        <!--AspectJ-->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
         </dependency>
 
 

@@ -5,7 +5,9 @@ import com.bob.common.utils.*;
 import com.bob.common.utils.spring.SpringUtils;
 import com.bob.framework.shiro.session.OnlineSession;
 import com.bob.web.system.domain.SystemLogininfor;
+import com.bob.web.system.domain.SystemOperLog;
 import com.bob.web.system.domain.SystemUserOnline;
+import com.bob.web.system.service.SystemOperLogService;
 import com.bob.web.system.service.SystemUserOnlineService;
 import com.bob.web.system.service.impl.SystemLogininforServiceImpl;
 import eu.bitwalker.useragentutils.UserAgent;
@@ -93,6 +95,23 @@ public class AsyncFactory {
                 online.setStatus(onlineSession.getStatus());
                 SpringUtils.getBean(SystemUserOnlineService.class).saveOnline(online);
 
+            }
+        };
+    }
+
+    /**
+     * 操作日志记录
+     *
+     * @param operLog 操作日志信息
+     * @return 任务task
+     */
+    public static TimerTask recordOper(final SystemOperLog operLog) {
+        return new TimerTask() {
+            @Override
+            public void run() {
+                // 远程查询操作地点
+                operLog.setOperLocation(AddressUtils.getRealAddressByIP(operLog.getOperIp()));
+                SpringUtils.getBean(SystemOperLogService.class).insertOperlog(operLog);
             }
         };
     }
