@@ -77,4 +77,12 @@ public class ShiroUtils {
     public static String getLoginName() {
         return getSysUser().getLoginName();
     }
+
+    /**
+     * 获取登录用户id
+     * @return
+     */
+    public static Long getUserId() {
+        return getSysUser().getUserId();
+    }
 }

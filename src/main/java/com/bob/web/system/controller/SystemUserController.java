@@ -45,6 +45,7 @@ public class SystemUserController extends BaseController {
     @Autowired
     private SysPasswordService passwordService;
 
+    @RequiresPermissions("system:user:view")
     @GetMapping()
     public String user() {
         return prefix + "/user";
@@ -226,5 +227,88 @@ public class SystemUserController extends BaseController {
     public AjaxResult importTemplate() {
         ExcelUtil<SystemUser> util = new ExcelUtil<>(SystemUser.class);
         return util.importTemplateExcel("用户数据");
+    }
+
+    /**
+     * 导出用户到excel
+     * @param user
+     * @return
+     */
+    @Log(title = "用户管理", businessType = BusinessType.EXPORT)
+    @RequiresPermissions("system:user:export")
+    @PostMapping("/export")
+    @ResponseBody
+    public AjaxResult export(SystemUser user) {
+        List<SystemUser> list = userService.selectUserList(user);
+        ExcelUtil<SystemUser> util = new ExcelUtil<>(SystemUser.class);
+        return util.exportExcel(list, "用户数据");
+    }
+
+    /**
+     * 重置密码
+     * @param userId
+     * @param modelMap
+     * @return
+     */
+    @RequiresPermissions("system:user:resetPwd")
+    @GetMapping("/resetPwd/{userId}")
+    public String resetPwd(@PathVariable("userId") Long userId, ModelMap modelMap) {
+        modelMap.put("user", userService.findUserById(userId));
+        return prefix + "/resetPwd";
+    }
+
+    /**
+     * 重置密码
+     * @param user
+     * @return
+     */
+    @RequiresPermissions("system:user:resetPwd")
+    @Log(title = "重置密码", businessType = BusinessType.UPDATE)
+    @PostMapping("/resetPwd")
+    @ResponseBody
+    public AjaxResult resetPwdSave(SystemUser user) {
+        userService.checkUserAllowed(user);
+        user.setSalt(ShiroUtils.randomSalt());
+        user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
+        if (userService.resetUserPwd(user) > 0) {
+            if (ShiroUtils.getUserId().longValue() == user.getUserId().longValue()) {
+                ShiroUtils.setSystemUser(userService.findUserById(user.getUserId()));
+            }
+            return success();
+        }
+        return error();
+    }
+
+    /**
+     * 授权角色
+     *
+     * @param userId
+     * @param modelMap
+     * @return
+     */
+    @GetMapping("/authRole/{userId}")
+    public String authRole(@PathVariable("userId") Long userId, ModelMap modelMap) {
+        SystemUser user = userService.findUserById(userId);
+        // 获取用户所属的角色列表
+        List<SystemRole> roles = roleService.selectRolesByUserId(userId);
+        modelMap.put("user", user);
+        modelMap.put("roles", SystemUser.isAdmin(userId) ? roles : roles.stream().filter(r -> !r.isAdmin()).collect(Collectors.toList()));
+        return prefix + "/authRole";
+    }
+
+    /**
+     * 用户授权角色
+     *
+     * @param userId
+     * @param roleIds
+     * @return
+     */
+    @RequiresPermissions("system:user:add")
+    @Log(title = "用户管理", businessType = BusinessType.GRANT)
+    @PostMapping("/authRole/insertAuthRole")
+    @ResponseBody
+    public AjaxResult insertAuthRole(Long userId, Long[] roleIds) {
+        userService.insertUserAuth(userId, roleIds);
+        return success();
     }
 }

@@ -353,4 +353,16 @@ public class SystemUserServiceImpl implements SystemUserService {
         return successMsg.toString();
     }
 
+    /**
+     * 用户授权角色
+     *
+     * @param userId  用户ID
+     * @param roleIds 角色组
+     */
+    @Override
+    public void insertUserAuth(Long userId, Long[] roleIds) {
+        userRoleMapper.deleteUserRoleByUserId(userId);
+        insertUserRole(userId, roleIds);
+    }
+
 }

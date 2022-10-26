@@ -135,4 +135,12 @@ public interface SystemUserService {
      * @return 结果
      */
     String importUser(List<SystemUser> userList, Boolean isUpdateSupport, String operName);
+
+    /**
+     * 用户授权角色
+     *
+     * @param userId 用户ID
+     * @param roleIds 角色组
+     */
+    void insertUserAuth(Long userId, Long[] roleIds);
 }
