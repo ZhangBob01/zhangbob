@@ -15,8 +15,8 @@
     }
 </style>
 <body class="hold-transition box box-main">
-<input id="treeId" name="treeId" type="hidden" th:value="${dept.deptId}"/>
-<input id="treeName" name="treeName" type="hidden" th:value="${dept.deptName}"/>
+<input id="treeId" name="treeId" type="hidden" th:value="${dept eq null ? null : dept.deptId}"/>
+<input id="treeName" name="treeName" type="hidden" th:value="${dept eq null ? null : dept.deptName}"/>
 <div class="wrapper">
     <div class="treeShowHideButton" onclick="$.tree.toggleSearch();">
         <label id="btnShow" title="显示搜索" style="display:none;">︾</label>

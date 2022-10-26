@@ -4,8 +4,10 @@ import com.bob.common.constant.UserConstants;
 import com.bob.common.core.text.Convert;
 import com.bob.common.exception.BusinessException;
 import com.bob.common.utils.StringUtils;
+import com.bob.common.utils.security.Md5Utils;
 import com.bob.web.system.domain.*;
 import com.bob.web.system.mapper.*;
+import com.bob.web.system.service.SystemConfigService;
 import com.bob.web.system.service.SystemUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,8 @@ public class SystemUserServiceImpl implements SystemUserService {
     private SystemUserPostMapper userPostMapper;
     @Autowired
     private SystemUserRoleMapper userRoleMapper;
+    @Autowired
+    private SystemConfigService configService;
 
     @Override
     public SystemUser findUserByUsername(String username) {
@@ -294,6 +298,59 @@ public class SystemUserServiceImpl implements SystemUserService {
         // 删除用户与岗位关联
         userPostMapper.deleteUserPost(userIds);
         return systemUserMapper.deleteUserByIds(userIds);
+    }
+
+    /**
+     * 导入用户数据
+     *
+     * @param userList        用户数据列表
+     * @param isUpdateSupport 是否更新支持，如果已存在，则进行更新数据
+     * @param operName        操作用户
+     * @return 结果
+     */
+    @Override
+    public String importUser(List<SystemUser> userList, Boolean isUpdateSupport, String operName) {
+        if (StringUtils.isNull(userList) || userList.size() == 0) {
+            throw new BusinessException("导入用户数据不能为空！");
+        }
+        int successNum = 0;
+        int failureNum = 0;
+        StringBuilder successMsg = new StringBuilder();
+        StringBuilder failureMsg = new StringBuilder();
+        String password = configService.selectConfigByKey("sys.user.initPassword");
+        for (SystemUser user : userList) {
+            try {
+                // 验证是否存在这个用户
+                SystemUser u = systemUserMapper.selectUserByLoginName(user.getLoginName());
+                if (StringUtils.isNull(u)) {
+                    user.setPassword(Md5Utils.hash(user.getLoginName() + password));
+                    user.setCreateBy(operName);
+                    this.insertUser(user);
+                    successNum++;
+                    successMsg.append("<br/>" + successNum + "、账号 " + user.getLoginName() + " 导入成功");
+                } else if (isUpdateSupport) {
+                    user.setUpdateBy(operName);
+                    this.updateUser(user);
+                    successNum++;
+                    successMsg.append("<br/>" + successNum + "、账号 " + user.getLoginName() + " 更新成功");
+                } else {
+                    failureNum++;
+                    failureMsg.append("<br/>" + failureNum + "、账号 " + user.getLoginName() + " 已存在");
+                }
+            } catch (Exception e) {
+                failureNum++;
+                String msg = "<br/>" + failureNum + "、账号 " + user.getLoginName() + " 导入失败：";
+                failureMsg.append(msg + e.getMessage());
+                log.error(msg, e);
+            }
+        }
+        if (failureNum > 0) {
+            failureMsg.insert(0, "很抱歉，导入失败！共 " + failureNum + " 条数据格式不正确，错误如下：");
+            throw new BusinessException(failureMsg.toString());
+        } else {
+            successMsg.insert(0, "恭喜您，数据已全部导入成功！共 " + successNum + " 条，数据如下：");
+        }
+        return successMsg.toString();
     }
 
 }

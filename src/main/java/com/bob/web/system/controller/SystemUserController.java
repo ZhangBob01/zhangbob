@@ -8,6 +8,7 @@ import com.bob.common.core.page.TableDataInfo;
 import com.bob.common.enums.BusinessType;
 import com.bob.common.utils.ShiroUtils;
 import com.bob.common.utils.StringUtils;
+import com.bob.common.utils.poi.ExcelUtil;
 import com.bob.framework.shiro.service.SysPasswordService;
 import com.bob.web.system.domain.SystemRole;
 import com.bob.web.system.domain.SystemUser;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,7 +46,7 @@ public class SystemUserController extends BaseController {
     private SysPasswordService passwordService;
 
     @GetMapping()
-    public String user () {
+    public String user() {
         return prefix + "/user";
     }
 
@@ -191,5 +193,38 @@ public class SystemUserController extends BaseController {
     @ResponseBody
     public AjaxResult remove(String ids) {
         return toAjax(userService.deleteUserByIds(ids));
+    }
+
+    /**
+     * excel导入系统用户
+     *
+     * @param file
+     * @param updateSupport
+     * @return
+     * @throws Exception
+     */
+    @Log(title = "用户管理", businessType = BusinessType.IMPORT)
+    @RequiresPermissions("system:user:import")
+    @PostMapping("/importData")
+    @ResponseBody
+    public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception {
+        ExcelUtil<SystemUser> util = new ExcelUtil<>(SystemUser.class);
+        List<SystemUser> userList = util.importExcel(file.getInputStream());
+        String operName = ShiroUtils.getSysUser().getLoginName();
+        String message = userService.importUser(userList, updateSupport, operName);
+        return AjaxResult.success(message);
+    }
+
+    /**
+     * 下载导入模版
+     *
+     * @return
+     */
+    @RequiresPermissions("system:user:view")
+    @GetMapping("/importTemplate")
+    @ResponseBody
+    public AjaxResult importTemplate() {
+        ExcelUtil<SystemUser> util = new ExcelUtil<>(SystemUser.class);
+        return util.importTemplateExcel("用户数据");
     }
 }
