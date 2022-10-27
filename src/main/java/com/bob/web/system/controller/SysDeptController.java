@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * 部门信息
  *
- * @author ruoyi
+ * @author bob
  */
 @Controller
 @RequestMapping("/system/dept")
@@ -34,12 +34,22 @@ public class SysDeptController extends BaseController {
     @Autowired
     private SystemDeptService deptService;
 
+    /**
+     * 部门管理
+     * @return
+     */
     @RequiresPermissions("system:dept:view")
     @GetMapping()
     public String dept() {
         return prefix + "/dept";
     }
 
+    /**
+     * 查询部门列表
+     *
+     * @param dept
+     * @return
+     */
     @RequiresPermissions("system:dept:list")
     @PostMapping("/list")
     @ResponseBody
@@ -50,15 +60,22 @@ public class SysDeptController extends BaseController {
 
     /**
      * 新增部门
+     *
+     * @param parentId
+     * @param modelMap
+     * @return
      */
     @GetMapping("/add/{parentId}")
-    public String add(@PathVariable("parentId") Long parentId, ModelMap mmap) {
-        mmap.put("dept", deptService.selectDeptById(parentId));
+    public String add(@PathVariable("parentId") Long parentId, ModelMap modelMap) {
+        modelMap.put("dept", deptService.selectDeptById(parentId));
         return prefix + "/add";
     }
 
     /**
      * 新增保存部门
+     *
+     * @param dept
+     * @return
      */
     @Log(title = "部门管理", businessType = BusinessType.INSERT)
     @RequiresPermissions("system:dept:add")
@@ -74,6 +91,10 @@ public class SysDeptController extends BaseController {
 
     /**
      * 修改
+     *
+     * @param deptId
+     * @param mmap
+     * @return
      */
     @GetMapping("/edit/{deptId}")
     public String edit(@PathVariable("deptId") Long deptId, ModelMap mmap) {
@@ -86,7 +107,10 @@ public class SysDeptController extends BaseController {
     }
 
     /**
-     * 保存
+     * 修改保存
+     *
+     * @param dept
+     * @return
      */
     @Log(title = "部门管理", businessType = BusinessType.UPDATE)
     @RequiresPermissions("system:dept:edit")
@@ -107,6 +131,9 @@ public class SysDeptController extends BaseController {
 
     /**
      * 删除
+     *
+     * @param deptId
+     * @return
      */
     @Log(title = "部门管理", businessType = BusinessType.DELETE)
     @RequiresPermissions("system:dept:remove")
@@ -124,6 +151,9 @@ public class SysDeptController extends BaseController {
 
     /**
      * 校验部门名称
+     *
+     * @param dept
+     * @return
      */
     @PostMapping("/checkDeptNameUnique")
     @ResponseBody
@@ -147,6 +177,8 @@ public class SysDeptController extends BaseController {
 
     /**
      * 加载部门列表树
+     *
+     * @return
      */
     @GetMapping("/treeData")
     @ResponseBody
@@ -157,6 +189,9 @@ public class SysDeptController extends BaseController {
 
     /**
      * 加载部门列表树（排除下级）
+     *
+     * @param excludeId
+     * @return
      */
     @GetMapping("/treeData/{excludeId}")
     @ResponseBody
@@ -169,6 +204,9 @@ public class SysDeptController extends BaseController {
 
     /**
      * 加载角色部门（数据权限）列表树
+     *
+     * @param role
+     * @return
      */
     @GetMapping("/roleDeptTreeData")
     @ResponseBody
