@@ -1,11 +1,11 @@
 //package com.bob.framework.aspectj;
 //
-//import com.ruoyi.common.annotation.DataScope;
-//import com.ruoyi.common.core.domain.BaseEntity;
-//import com.ruoyi.common.core.domain.entity.SysRole;
-//import com.ruoyi.common.core.domain.entity.SysUser;
-//import com.ruoyi.common.utils.ShiroUtils;
-//import com.ruoyi.common.utils.StringUtils;
+//import com.bob.common.annotation.DataScope;
+//import com.bob.common.core.domain.BaseEntity;
+//import com.bob.common.core.domain.entity.SysRole;
+//import com.bob.common.core.domain.entity.SysUser;
+//import com.bob.common.utils.ShiroUtils;
+//import com.bob.common.utils.StringUtils;
 //import org.aspectj.lang.JoinPoint;
 //import org.aspectj.lang.Signature;
 //import org.aspectj.lang.annotation.Aspect;
@@ -19,7 +19,7 @@
 ///**
 // * 数据过滤处理
 // *
-// * @author ruoyi
+// * @author bob
 // */
 //@Aspect
 //@Component
@@ -56,7 +56,7 @@
 //    public static final String DATA_SCOPE = "dataScope";
 //
 //    // 配置织入点
-//    @Pointcut("@annotation(com.ruoyi.common.annotation.DataScope)")
+//    @Pointcut("@annotation(com.bob.common.annotation.DataScope)")
 //    public void dataScopePointCut()
 //    {
 //    }

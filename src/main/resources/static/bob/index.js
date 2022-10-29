@@ -323,7 +323,7 @@ $(function() {
     }
 
     function menuBlank() {
-    	// 新窗口打开外网以http://开头，如http://ruoyi.vip
+    	// 新窗口打开外网以http://开头，如http://bob.vip
     	var dataUrl = $(this).attr('href');
     	window.open(dataUrl);
     	return false;

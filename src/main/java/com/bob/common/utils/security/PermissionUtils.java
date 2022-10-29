@@ -15,7 +15,7 @@ import java.beans.PropertyDescriptor;
 /**
  * permission 工具类
  *
- * @author ruoyi
+ * @author bob
  */
 public class PermissionUtils {
     private static final Logger log = LoggerFactory.getLogger(PermissionUtils.class);

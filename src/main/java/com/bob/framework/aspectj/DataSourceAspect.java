@@ -1,8 +1,8 @@
 //package com.bob.framework.aspectj;
 //
-//import com.ruoyi.common.annotation.DataSource;
-//import com.ruoyi.common.config.datasource.DynamicDataSourceContextHolder;
-//import com.ruoyi.common.utils.StringUtils;
+//import com.bob.common.annotation.DataSource;
+//import com.bob.common.config.datasource.DynamicDataSourceContextHolder;
+//import com.bob.common.utils.StringUtils;
 //import org.aspectj.lang.ProceedingJoinPoint;
 //import org.aspectj.lang.annotation.Around;
 //import org.aspectj.lang.annotation.Aspect;
@@ -19,7 +19,7 @@
 ///**
 // * 多数据源处理
 // *
-// * @author ruoyi
+// * @author bob
 // */
 //@Aspect
 //@Order(1)
@@ -28,8 +28,8 @@
 //{
 //    protected Logger logger = LoggerFactory.getLogger(getClass());
 //
-//    @Pointcut("@annotation(com.ruoyi.common.annotation.DataSource)"
-//            + "|| @within(com.ruoyi.common.annotation.DataSource)")
+//    @Pointcut("@annotation(com.bob.common.annotation.DataSource)"
+//            + "|| @within(com.bob.common.annotation.DataSource)")
 //    public void dsPointCut()
 //    {
 //
