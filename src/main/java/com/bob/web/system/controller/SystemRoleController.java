@@ -281,4 +281,37 @@ public class SystemRoleController extends BaseController {
         return toAjax(roleService.insertAuthUsers(roleId, userIds));
     }
 
+    /**
+     * 角色分配数据权限
+     *
+     * @param roleId
+     * @param modelMap
+     * @return
+     */
+    @GetMapping("/authDataScope/{roleId}")
+    public String authDataScope(@PathVariable("roleId") Long roleId, ModelMap modelMap) {
+        modelMap.put("role", roleService.selectRoleById(roleId));
+        return prefix + "/dataScope";
+    }
+
+    /**
+     * 保存角色分配数据权限
+     *
+     * @param role
+     * @return
+     */
+    @RequiresPermissions("system:role:edit")
+    @Log(title = "角色管理", businessType = BusinessType.UPDATE)
+    @PostMapping("/authDataScope")
+    @ResponseBody
+    public AjaxResult authDataScopeSave(SystemRole role) {
+        roleService.checkRoleAllowed(role);
+        role.setUpdateBy(ShiroUtils.getLoginName());
+        if (roleService.authDataScope(role) > 0) {
+            ShiroUtils.setSystemUser(userService.findUserById(ShiroUtils.getSysUser().getUserId()));
+            return success();
+        }
+        return error();
+    }
+
 }
