@@ -9,8 +9,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
 
-import java.security.SecureRandom;
-
 /**
  * @author: zhang bob
  * @date: 2021-05-17 15:51
@@ -34,7 +32,7 @@ public class ShiroUtils {
     public static SystemUser getSysUser() {
         SystemUser user = null;
         Object object = getSubject().getPrincipal();
-        if (StringUtils.isNotNUll(object)) {
+        if (StringUtils.isNotNull(object)) {
             user = new SystemUser();
             BeanUtils.copyBeanProp(user, object);
         }

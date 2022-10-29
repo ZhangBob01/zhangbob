@@ -27,4 +27,12 @@ public interface SystemMenuMapper {
      * @return
      */
     List<String> selectPermsByUserId(Long userId);
+
+    /**
+     * 根据角色ID查询菜单
+     *
+     * @param roleId 角色ID
+     * @return 菜单列表
+     */
+    List<String> selectMenuTree(Long roleId);
 }

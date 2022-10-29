@@ -143,4 +143,19 @@ public interface SystemUserService {
      * @param roleIds 角色组
      */
     void insertUserAuth(Long userId, Long[] roleIds);
+
+    /**
+     * 根据条件分页查询已分配用户角色列表
+     *
+     * @param user
+     * @return
+     */
+    List<SystemUser> selectAlllocatedList(SystemUser user);
+
+    /**
+     * 根据条件分页查询未分配用户角色列表
+     * @param user
+     * @return
+     */
+    List<SystemUser> selectUnalllocatedList(SystemUser user);
 }

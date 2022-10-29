@@ -71,7 +71,7 @@ public class SystemDeptServiceImpl implements SystemDeptService {
     public List<Ztree> initZtree(List<SystemDept> deptList, List<String> roleDeptList) {
 
         List<Ztree> ztrees = new ArrayList<>();
-        boolean isCheck = StringUtils.isNotNUll(roleDeptList);
+        boolean isCheck = StringUtils.isNotNull(roleDeptList);
         for (SystemDept dept : deptList) {
             if (UserConstants.DEPT_NORMAL.equals(dept.getStatus())) {
                 Ztree ztree = new Ztree();
@@ -121,7 +121,7 @@ public class SystemDeptServiceImpl implements SystemDeptService {
         Long roleId = role.getRoleId();
         List<Ztree> ztrees = new ArrayList<Ztree>();
         List<SystemDept> deptList = selectDeptList(new SystemDept());
-        if (StringUtils.isNotNUll(roleId)) {
+        if (StringUtils.isNotNull(roleId)) {
             List<String> roleDeptList = deptMapper.selectRoleDeptTree(roleId);
             ztrees = initZtree(deptList, roleDeptList);
         } else {
@@ -194,7 +194,7 @@ public class SystemDeptServiceImpl implements SystemDeptService {
     public int updateDept(SystemDept dept) {
         SystemDept newParentDept = deptMapper.selectDeptById(dept.getParentId());
         SystemDept oldDept = selectDeptById(dept.getDeptId());
-        if (StringUtils.isNotNUll(newParentDept) && StringUtils.isNotNUll(oldDept)) {
+        if (StringUtils.isNotNull(newParentDept) && StringUtils.isNotNull(oldDept)) {
             String newAncestors = newParentDept.getAncestors() + "," + newParentDept.getDeptId();
             String oldAncestors = oldDept.getAncestors();
             dept.setAncestors(newAncestors);
@@ -269,7 +269,7 @@ public class SystemDeptServiceImpl implements SystemDeptService {
     public String checkDeptNameUnique(SystemDept dept) {
         Long deptId = StringUtils.isNull(dept.getDeptId()) ? -1L : dept.getDeptId();
         SystemDept info = deptMapper.checkDeptNameUnique(dept.getDeptName(), dept.getParentId());
-        if (StringUtils.isNotNUll(info) && info.getDeptId().longValue() != deptId.longValue()) {
+        if (StringUtils.isNotNull(info) && info.getDeptId().longValue() != deptId.longValue()) {
             return UserConstants.DEPT_NAME_NOT_UNIQUE;
         }
         return UserConstants.DEPT_NAME_UNIQUE;

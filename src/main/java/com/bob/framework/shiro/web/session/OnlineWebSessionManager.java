@@ -80,7 +80,7 @@ public class OnlineWebSessionManager extends DefaultWebSessionManager
     {
         OnlineSession session = null;
         Object obj = doGetSession(sessionKey);
-        if (StringUtils.isNotNUll(obj))
+        if (StringUtils.isNotNull(obj))
         {
             session = new OnlineSession();
             BeanUtils.copyBeanProp(session, obj);

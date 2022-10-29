@@ -43,7 +43,7 @@ public class LogoutFilter extends org.apache.shiro.web.filter.authc.LogoutFilter
             String redirectUrl = getRedirectUrl(request, response, subject);
             try {
                 SystemUser user = ShiroUtils.getSysUser();
-                if (StringUtils.isNotNUll(user)) {
+                if (StringUtils.isNotNull(user)) {
                     String loginName = user.getLoginName();
                     // 记录用户退出日志
                     AsyncManager.me().execute(AsyncFactory.recordLogininfor(loginName, Constants.LOGOUT, MessageUtils.message("user.logout.success")));

@@ -140,7 +140,7 @@ public class SystemPostServiceImpl implements SystemPostService {
     public String checkPostNameUnique(SystemPost post) {
         Long postId = StringUtils.isNull(post.getPostId()) ? -1L : post.getPostId();
         SystemPost info = postMapper.checkPostNameUnique(post.getPostName());
-        if (StringUtils.isNotNUll(info) && info.getPostId().longValue() != postId.longValue()) {
+        if (StringUtils.isNotNull(info) && info.getPostId().longValue() != postId.longValue()) {
             return UserConstants.POST_NAME_NOT_UNIQUE;
         }
         return UserConstants.POST_NAME_UNIQUE;
@@ -156,7 +156,7 @@ public class SystemPostServiceImpl implements SystemPostService {
     public String checkPostCodeUnique(SystemPost post) {
         Long postId = StringUtils.isNull(post.getPostId()) ? -1L : post.getPostId();
         SystemPost info = postMapper.checkPostCodeUnique(post.getPostCode());
-        if (StringUtils.isNotNUll(info) && info.getPostId().longValue() != postId.longValue()) {
+        if (StringUtils.isNotNull(info) && info.getPostId().longValue() != postId.longValue()) {
             return UserConstants.POST_CODE_NOT_UNIQUE;
         }
         return UserConstants.POST_CODE_UNIQUE;

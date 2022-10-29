@@ -180,7 +180,7 @@ public class SystemDictTypeServiceImpl implements SystemDictTypeService {
     public String checkDictTypeUnique(SystemDictType dict) {
         Long dictId = StringUtils.isNull(dict.getDictId()) ? -1L : dict.getDictId();
         SystemDictType dictType = dictTypeMapper.checkDictTypeUnique(dict.getDictType());
-        if (StringUtils.isNotNUll(dictType) && dictType.getDictId().longValue() != dictId.longValue()) {
+        if (StringUtils.isNotNull(dictType) && dictType.getDictId().longValue() != dictId.longValue()) {
             return UserConstants.DICT_TYPE_NOT_UNIQUE;
         }
         return UserConstants.DICT_TYPE_UNIQUE;

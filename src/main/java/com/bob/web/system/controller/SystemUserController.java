@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/system/user")
 public class SystemUserController extends BaseController {
-    private String prefix = "user";
+    private String prefix = "system/user";
 
     @Autowired
     private SystemUserService userService;

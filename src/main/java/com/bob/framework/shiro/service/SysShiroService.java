@@ -41,7 +41,7 @@ public class SysShiroService {
 
     public Session createSession(SystemUserOnline userOnline) {
         OnlineSession onlineSession = new OnlineSession();
-        if (StringUtils.isNotNUll(userOnline)) {
+        if (StringUtils.isNotNull(userOnline)) {
             onlineSession.setId(userOnline.getSessionId());
             onlineSession.setHost(userOnline.getIpaddr());
             onlineSession.setBrowser(userOnline.getBrowser());

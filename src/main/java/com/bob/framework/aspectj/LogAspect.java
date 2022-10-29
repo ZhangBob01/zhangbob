@@ -91,7 +91,7 @@ public class LogAspect {
             operLog.setOperUrl(ServletUtils.getRequest().getRequestURI());
             if (currentUser != null) {
                 operLog.setOperName(currentUser.getLoginName());
-                if (StringUtils.isNotNUll(currentUser.getSystemDept())
+                if (StringUtils.isNotNull(currentUser.getSystemDept())
                         && StringUtils.isNotEmpty(currentUser.getSystemDept().getDeptName())) {
                     operLog.setDeptName(currentUser.getSystemDept().getDeptName());
                 }

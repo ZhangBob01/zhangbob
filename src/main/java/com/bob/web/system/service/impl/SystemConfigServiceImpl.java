@@ -63,7 +63,7 @@ public class SystemConfigServiceImpl implements SystemConfigService {
         SystemConfig config = new SystemConfig();
         config.setConfigKey(configKey);
         SystemConfig retConfig = configMapper.selectConfig(config);
-        if (StringUtils.isNotNUll(retConfig)) {
+        if (StringUtils.isNotNull(retConfig)) {
             CacheUtils.put(getCacheName(), getCacheKey(configKey), retConfig.getConfigValue());
             return retConfig.getConfigValue();
         }
@@ -152,7 +152,7 @@ public class SystemConfigServiceImpl implements SystemConfigService {
     public String checkConfigKeyUnique(SystemConfig config) {
         Long configId = StringUtils.isNull(config.getConfigId()) ? -1L : config.getConfigId();
         SystemConfig info = configMapper.checkConfigKeyUnique(config.getConfigKey());
-        if (StringUtils.isNotNUll(info) && info.getConfigId().longValue() != configId.longValue()) {
+        if (StringUtils.isNotNull(info) && info.getConfigId().longValue() != configId.longValue()) {
             return UserConstants.CONFIG_KEY_NOT_UNIQUE;
         }
         return UserConstants.CONFIG_KEY_UNIQUE;

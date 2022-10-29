@@ -60,7 +60,7 @@ public class AjaxResult extends HashMap<String, Object> {
     public AjaxResult (Type type, String message, Object data){
         super.put(CODE_TAG, type.value);
         super.put(MSG_TAG, message);
-        if (StringUtils.isNotNUll(data)){
+        if (StringUtils.isNotNull(data)){
             super.put(DATA_TAG, data);
         }
     }

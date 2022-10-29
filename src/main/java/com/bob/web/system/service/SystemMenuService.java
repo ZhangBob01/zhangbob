@@ -1,6 +1,8 @@
 package com.bob.web.system.service;
 
+import com.bob.common.core.domain.Ztree;
 import com.bob.web.system.domain.SystemMenu;
+import com.bob.web.system.domain.SystemRole;
 import com.bob.web.system.domain.SystemUser;
 
 import java.util.List;
@@ -22,4 +24,13 @@ public interface SystemMenuService {
      * @return 权限列表
      */
     Set<String> selectPermsByUserId(Long userId);
+
+    /**
+     * 查询所有菜单列表树
+     *
+     * @param role
+     * @param userId
+     * @return
+     */
+    List<Ztree> menuTreeData(SystemRole role, Long userId);
 }

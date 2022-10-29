@@ -38,7 +38,7 @@ public class SystemUserOnlineServiceImpl implements SystemUserOnlineService {
     @Override
     public void deleteOnlineById(String sessionId) {
         SystemUserOnline userOnline = selectOnlineById(sessionId);
-        if (StringUtils.isNotNUll(userOnline)) {
+        if (StringUtils.isNotNull(userOnline)) {
             userOnlineMapper.deleteOnlineById(sessionId);
         }
     }
@@ -47,7 +47,7 @@ public class SystemUserOnlineServiceImpl implements SystemUserOnlineService {
     public void batchDeleteOnline(List<String> sessions) {
         for (String sessionId : sessions) {
             SystemUserOnline userOnline = selectOnlineById(sessionId);
-            if (StringUtils.isNotNUll(userOnline)) {
+            if (StringUtils.isNotNull(userOnline)) {
                 userOnlineMapper.deleteOnlineById(sessionId);
             }
         }

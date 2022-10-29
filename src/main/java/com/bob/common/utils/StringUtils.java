@@ -281,7 +281,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * @param object
      * @return
      */
-    public static boolean isNotNUll(Object object) {
+    public static boolean isNotNull(Object object) {
         return !isNull(object);
     }
 

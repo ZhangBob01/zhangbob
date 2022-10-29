@@ -29,7 +29,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/system/dept")
 public class SysDeptController extends BaseController {
-    private String prefix = "dept";
+    private String prefix = "system/dept";
 
     @Autowired
     private SystemDeptService deptService;
@@ -99,7 +99,7 @@ public class SysDeptController extends BaseController {
     @GetMapping("/edit/{deptId}")
     public String edit(@PathVariable("deptId") Long deptId, ModelMap mmap) {
         SystemDept dept = deptService.selectDeptById(deptId);
-        if (StringUtils.isNotNUll(dept) && 100L == deptId) {
+        if (StringUtils.isNotNull(dept) && 100L == deptId) {
             dept.setParentName("无");
         }
         mmap.put("dept", dept);

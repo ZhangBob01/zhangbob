@@ -163,7 +163,7 @@ public class ExcelUtil<T> {
             Row heard = sheet.getRow(0);
             for (int i = 0; i < heard.getPhysicalNumberOfCells(); i++) {
                 Cell cell = heard.getCell(i);
-                if (StringUtils.isNotNUll(cell)) {
+                if (StringUtils.isNotNull(cell)) {
                     String value = this.getCellValue(heard, i).toString();
                     cellMap.put(value, i);
                 } else {
@@ -228,7 +228,7 @@ public class ExcelUtil<T> {
                     } else if (Boolean.TYPE == fieldType || Boolean.class == fieldType) {
                         val = Convert.toBool(val, false);
                     }
-                    if (StringUtils.isNotNUll(fieldType)) {
+                    if (StringUtils.isNotNull(fieldType)) {
                         Excel attr = field.getAnnotation(Excel.class);
                         String propertyName = field.getName();
                         if (StringUtils.isNotEmpty(attr.targetAttr())) {
@@ -484,11 +484,11 @@ public class ExcelUtil<T> {
                 String readConverterExp = attr.readConverterExp();
                 String separator = attr.separator();
                 String dictType = attr.dictType();
-                if (StringUtils.isNotEmpty(dateFormat) && StringUtils.isNotNUll(value)) {
+                if (StringUtils.isNotEmpty(dateFormat) && StringUtils.isNotNull(value)) {
                     cell.setCellValue(DateUtils.parseDateToStr(dateFormat, (Date) value));
-                } else if (StringUtils.isNotEmpty(readConverterExp) && StringUtils.isNotNUll(value)) {
+                } else if (StringUtils.isNotEmpty(readConverterExp) && StringUtils.isNotNull(value)) {
                     cell.setCellValue(convertByExp(Convert.toStr(value), readConverterExp, separator));
-                } else if (StringUtils.isNotEmpty(dictType) && StringUtils.isNotNUll(value)) {
+                } else if (StringUtils.isNotEmpty(dictType) && StringUtils.isNotNull(value)) {
                     cell.setCellValue(convertDictByExp(Convert.toStr(value), dictType, separator));
                 } else if (value instanceof BigDecimal && -1 != attr.scale()) {
                     cell.setCellValue((((BigDecimal) value).setScale(attr.scale(), attr.roundingMode())).toString());
@@ -738,7 +738,7 @@ public class ExcelUtil<T> {
      * @throws Exception
      */
     private Object getValue(Object o, String name) throws Exception {
-        if (StringUtils.isNotNUll(o) && StringUtils.isNotEmpty(name)) {
+        if (StringUtils.isNotNull(o) && StringUtils.isNotEmpty(name)) {
             Class<?> clazz = o.getClass();
             Field field = clazz.getDeclaredField(name);
             field.setAccessible(true);
@@ -820,7 +820,7 @@ public class ExcelUtil<T> {
         Object val = "";
         try {
             Cell cell = row.getCell(column);
-            if (StringUtils.isNotNUll(cell)) {
+            if (StringUtils.isNotNull(cell)) {
                 if (cell.getCellType() == CellType.NUMERIC || cell.getCellType() == CellType.FORMULA) {
                     val = cell.getNumericCellValue();
                     if (DateUtil.isCellDateFormatted(cell)) {

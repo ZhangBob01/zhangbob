@@ -5,7 +5,6 @@ import com.bob.common.constant.UserConstants;
 import com.bob.common.core.text.Convert;
 import com.bob.common.exception.BusinessException;
 import com.bob.common.utils.StringUtils;
-import com.bob.common.utils.spring.SpringUtils;
 import com.bob.web.system.domain.SystemRole;
 import com.bob.web.system.domain.SystemRoleDept;
 import com.bob.web.system.domain.SystemRoleMenu;
@@ -75,7 +74,7 @@ public class SystemRoleServiceImpl implements SystemRoleService {
         List<SystemRole> perms = roleMapper.findRoleListByUserId(userId);
         Set<String> permsSet = new HashSet<>();
         for (SystemRole perm : perms) {
-            if (StringUtils.isNotNUll(perm)) {
+            if (StringUtils.isNotNull(perm)) {
                 permsSet.addAll(Arrays.asList(perm.getRoleKey().trim().split(",")));
             }
         }
@@ -220,7 +219,7 @@ public class SystemRoleServiceImpl implements SystemRoleService {
     public int insertRoleMenu(SystemRole role) {
         int rows = 1;
         // 新增用户与角色管理
-        List<SystemRoleMenu> list = new ArrayList<SystemRoleMenu>();
+        List<SystemRoleMenu> list = new ArrayList<>();
         for (Long menuId : role.getMenuIds()) {
             SystemRoleMenu rm = new SystemRoleMenu();
             rm.setRoleId(role.getRoleId());
@@ -264,7 +263,7 @@ public class SystemRoleServiceImpl implements SystemRoleService {
     public String checkRoleNameUnique(SystemRole role) {
         Long roleId = StringUtils.isNull(role.getRoleId()) ? -1L : role.getRoleId();
         SystemRole info = roleMapper.checkRoleNameUnique(role.getRoleName());
-        if (StringUtils.isNotNUll(info) && info.getRoleId().longValue() != roleId.longValue()) {
+        if (StringUtils.isNotNull(info) && info.getRoleId().longValue() != roleId.longValue()) {
             return UserConstants.ROLE_NAME_NOT_UNIQUE;
         }
         return UserConstants.ROLE_NAME_UNIQUE;
@@ -280,7 +279,7 @@ public class SystemRoleServiceImpl implements SystemRoleService {
     public String checkRoleKeyUnique(SystemRole role) {
         Long roleId = StringUtils.isNull(role.getRoleId()) ? -1L : role.getRoleId();
         SystemRole info = roleMapper.checkRoleKeyUnique(role.getRoleKey());
-        if (StringUtils.isNotNUll(info) && info.getRoleId().longValue() != roleId.longValue()) {
+        if (StringUtils.isNotNull(info) && info.getRoleId().longValue() != roleId.longValue()) {
             return UserConstants.ROLE_KEY_NOT_UNIQUE;
         }
         return UserConstants.ROLE_KEY_UNIQUE;
@@ -293,7 +292,7 @@ public class SystemRoleServiceImpl implements SystemRoleService {
      */
     @Override
     public void checkRoleAllowed(SystemRole role) {
-        if (StringUtils.isNotNUll(role.getRoleId()) && role.isAdmin()) {
+        if (StringUtils.isNotNull(role.getRoleId()) && role.isAdmin()) {
             throw new BusinessException("不允许操作超级管理员角色");
         }
     }

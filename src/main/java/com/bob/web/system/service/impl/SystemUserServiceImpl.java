@@ -1,5 +1,6 @@
 package com.bob.web.system.service.impl;
 
+import com.bob.common.annotation.DataScope;
 import com.bob.common.constant.UserConstants;
 import com.bob.common.core.text.Convert;
 import com.bob.common.exception.BusinessException;
@@ -210,7 +211,7 @@ public class SystemUserServiceImpl implements SystemUserService {
      */
     public void insertUserPost(SystemUser user) {
         Long[] posts = user.getPostIds();
-        if (StringUtils.isNotNUll(posts)) {
+        if (StringUtils.isNotNull(posts)) {
             // 新增用户与岗位管理
             List<SystemUserPost> list = new ArrayList<SystemUserPost>();
             for (Long postId : posts) {
@@ -232,7 +233,7 @@ public class SystemUserServiceImpl implements SystemUserService {
      * @param roleIds
      */
     public void insertUserRole(Long userId, Long[] roleIds) {
-        if (StringUtils.isNotNUll(roleIds)) {
+        if (StringUtils.isNotNull(roleIds)) {
             // 新增用户与角色管理
             List<SystemUserRole> list = new ArrayList<>();
             for (Long roleId : roleIds) {
@@ -275,7 +276,7 @@ public class SystemUserServiceImpl implements SystemUserService {
      */
     @Override
     public void checkUserAllowed(SystemUser user) {
-        if (StringUtils.isNotNUll(user.getUserId()) && user.isAdmin()) {
+        if (StringUtils.isNotNull(user.getUserId()) && user.isAdmin()) {
             throw new BusinessException("不允许操作超级管理员用户");
         }
     }
@@ -363,6 +364,30 @@ public class SystemUserServiceImpl implements SystemUserService {
     public void insertUserAuth(Long userId, Long[] roleIds) {
         userRoleMapper.deleteUserRoleByUserId(userId);
         insertUserRole(userId, roleIds);
+    }
+
+    /**
+     * 根据条件分页查询已分配用户角色列表
+     *
+     * @param user 用户信息
+     * @return 用户信息集合信息
+     */
+    @Override
+    @DataScope(deptAlias = "d", userAlias = "u")
+    public List<SystemUser> selectAlllocatedList(SystemUser user) {
+        return systemUserMapper.selectAllocatedList(user);
+    }
+
+    /**
+     * 根据条件分页查询未分配用户角色列表
+     *
+     * @param user 用户信息
+     * @return 用户信息集合信息
+     */
+    @Override
+    @DataScope(deptAlias = "d", userAlias = "u")
+    public List<SystemUser> selectUnalllocatedList(SystemUser user) {
+        return systemUserMapper.selectUnallocatedList(user);
     }
 
 }
