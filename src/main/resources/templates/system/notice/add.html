@@ -71,7 +71,6 @@
 	            dataType: 'json',
 	            success: function(result) {
 	                if (result.code == web_status.SUCCESS) {
-						debugger;
 	                	$(obj).summernote('editor.insertImage', result.url, result.fileName);
 					} else {
 						$.modal.alertError(result.msg);
