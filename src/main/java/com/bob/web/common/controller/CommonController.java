@@ -63,7 +63,7 @@ public class CommonController {
      */
     @PostMapping("/common/upload")
     @ResponseBody
-    public AjaxResult uploadFile(MultipartFile file) throws Exception {
+    public AjaxResult uploadFile(MultipartFile file){
         try {
             // 上传文件路径
             String filePath = BobConfig.getUploadPath();

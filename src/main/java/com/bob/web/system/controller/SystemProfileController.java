@@ -30,7 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class SystemProfileController extends BaseController {
 
     // 定义前缀
-    private String prefix = "user/profile";
+    private String prefix = "system/user/profile";
 
     @Autowired
     private SystemUserService userService;
