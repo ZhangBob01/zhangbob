@@ -4,6 +4,7 @@ import com.bob.common.annotation.Log;
 import com.bob.common.constant.UserConstants;
 import com.bob.common.core.controller.BaseController;
 import com.bob.common.core.domain.AjaxResult;
+import com.bob.common.core.domain.Ztree;
 import com.bob.common.core.page.TableDataInfo;
 import com.bob.common.enums.BusinessType;
 import com.bob.common.utils.ShiroUtils;
@@ -46,13 +47,14 @@ public class SystemDictTypeController extends BaseController {
 
     /**
      * 获取数据字典列表
+     *
      * @param dictType
      * @return
      */
     @RequiresPermissions("system:dict:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(SystemDictType dictType){
+    public TableDataInfo list(SystemDictType dictType) {
         startPage();
         List<SystemDictType> list = dictTypeService.selectDictTypeList(dictType);
 
@@ -65,7 +67,7 @@ public class SystemDictTypeController extends BaseController {
      * @return
      */
     @GetMapping("/add")
-    public String add(){
+    public String add() {
         return prefix + "/add";
     }
 
@@ -79,12 +81,12 @@ public class SystemDictTypeController extends BaseController {
     @PostMapping("/add")
     @Log(title = "数据字典管理", businessType = BusinessType.INSERT)
     @ResponseBody
-    public AjaxResult add(@Valid SystemDictType dictType){
-        if (UserConstants.DICT_TYPE_NOT_UNIQUE.equals(dictType.getDictType())){
-            return error("添加字典类型："+dictType.getDictType()+"失败，类型重复");
+    public AjaxResult add(@Valid SystemDictType dictType) {
+        if (UserConstants.DICT_TYPE_NOT_UNIQUE.equals(dictType.getDictType())) {
+            return error("添加字典类型：" + dictType.getDictType() + "失败，类型重复");
         }
         dictType.setCreateBy(ShiroUtils.getLoginName());
-       return toAjax(dictTypeService.insertDictType(dictType));
+        return toAjax(dictTypeService.insertDictType(dictType));
     }
 
     /**
@@ -106,7 +108,7 @@ public class SystemDictTypeController extends BaseController {
      * @return
      */
     @GetMapping("/edit/{dictId}")
-    public String edit(@PathVariable("dictId") Long dictId, ModelMap modelMap){
+    public String edit(@PathVariable("dictId") Long dictId, ModelMap modelMap) {
         modelMap.put("dict", dictTypeService.selectDictTypeById(dictId));
         return prefix + "/edit";
     }
@@ -181,9 +183,6 @@ public class SystemDictTypeController extends BaseController {
      * @param modelMap
      * @return
      */
-    /**
-     * 查询字典详细
-     */
     @RequiresPermissions("system:dict:list")
     @GetMapping("/detail/{dictId}")
     public String detail(@PathVariable("dictId") Long dictId, ModelMap modelMap) {
@@ -192,5 +191,32 @@ public class SystemDictTypeController extends BaseController {
         return "system/dict/data/data";
     }
 
+    /**
+     * 选择字典树
+     *
+     * @param columnId
+     * @param dictType
+     * @param modelMap
+     * @return
+     */
+    @GetMapping("/selectDictTree/{columnId}/{dictType}")
+    public String selectDeptTree(@PathVariable("columnId") Long columnId, @PathVariable("dictType") String dictType,
+                                 ModelMap modelMap) {
+        modelMap.put("columnId", columnId);
+        modelMap.put("dict", dictTypeService.selectDictTypeByType(dictType));
+        return prefix + "/tree";
+    }
+
+    /**
+     * 加载字典列表树
+     *
+     * @return
+     */
+    @GetMapping("/treeData")
+    @ResponseBody
+    public List<Ztree> treeData() {
+        List<Ztree> ztrees = dictTypeService.selectDictTree(new SystemDictType());
+        return ztrees;
+    }
 
 }

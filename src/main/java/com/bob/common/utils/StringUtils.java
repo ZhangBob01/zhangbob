@@ -20,7 +20,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     /**
      * 下划线.
      */
-    private static final String SEPARATOR = "_";
+    private static final char SEPARATOR = '_';
 
     /**
      * 设置参数不为空的默认值
@@ -252,7 +252,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * @param str 字符串
      * @return
      */
-    public static String convertToCamlCase(String str){
+    public static String convertToCamelCase(String str){
 
         StringBuilder sb = new StringBuilder();
         if (str == null ||str.isEmpty()){
@@ -295,5 +295,34 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     public static <T> T cast(Object obj)
     {
         return (T) obj;
+    }
+
+    /**
+     * 驼峰式命名法
+     * 例如：user_name->userName
+     */
+    public static String toCamelCase(String s) {
+        if (s == null) {
+            return null;
+        }
+        if (s.indexOf(SEPARATOR) == -1) {
+            return s;
+        }
+        s = s.toLowerCase();
+        StringBuilder sb = new StringBuilder(s.length());
+        boolean upperCase = false;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+
+            if (c == SEPARATOR) {
+                upperCase = true;
+            } else if (upperCase) {
+                sb.append(Character.toUpperCase(c));
+                upperCase = false;
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
     }
 }
